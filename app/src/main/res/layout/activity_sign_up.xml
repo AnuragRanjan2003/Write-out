@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/white"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".SignInActivity">
+    tools:context=".SignUpActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="300dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -25,9 +22,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
                 android:fontFamily="casual"
-                android:text="@string/write_out"
+                android:text="Write Out"
                 android:textColor="#FB8C00"
-                android:textSize="50sp"
+                android:textSize="50dp"
                 android:textStyle="bold|italic" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -39,51 +36,61 @@
                 android:paddingBottom="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etSignInEmail"
+                    android:id="@+id/etSignUpEmail"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:hint="@string/email" />
+                    android:layout_margin="5dp"
+                    android:hint="Email" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tvPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSignUpUserName"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:hint="Username" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etSignInPassword"
+                    android:id="@+id/etSignUpPassword"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:hint="@string/password" />
+                    android:layout_margin="5dp"
+                    android:hint="Password" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tvNewUser"
+            <Button
+                android:id="@+id/btnSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="20dp"
-                android:text="@string/new_user_sign_up"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/btnSignIn"
-                android:layout_width="150dp"
-
-                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="70dp"
-                android:backgroundTint="@android:color/holo_orange_dark"
-                android:text="@string/sign_in"
-                android:textColor="@color/white"
+                android:width="150dp"
+                android:height="50dp"
+                android:backgroundTint="#FB8C00"
+                android:text="Sign Up"
                 android:textSize="20sp" />
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

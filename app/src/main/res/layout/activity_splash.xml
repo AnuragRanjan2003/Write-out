@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FB8C00"
     tools:context=".SplashActivity">
 
     <com.airbnb.lottie.LottieAnimationView
@@ -15,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lottie_rawRes="@raw/WAnimation"
-        app:lottie_autoPlay="true"/>
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/wanimarion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
