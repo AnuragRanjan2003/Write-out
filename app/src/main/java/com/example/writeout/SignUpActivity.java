@@ -43,14 +43,17 @@ public class SignUpActivity extends AppCompatActivity {
                 if(Email.getText().toString().isEmpty()){
                     Email.setError("Email is Required");
                     progressDialog.dismiss();
+                    return;
                 }
                 if(password.getText().toString().isEmpty()){
                     password.setError("Password is Required");
                     progressDialog.dismiss();
+                    return;
                 }
                 if(Username.getText().toString().isEmpty()){
                     Username.setError("Username Required");
                     progressDialog.dismiss();
+                    return;
                 }
                 else {
                     mAuth.createUserWithEmailAndPassword(Email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -65,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 finish();
                             } else {
                                 progressDialog.dismiss();
-                                Toast.makeText(SignUpActivity.this, "Signing Up Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
 
                         }

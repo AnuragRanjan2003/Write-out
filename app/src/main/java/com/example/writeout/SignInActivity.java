@@ -67,7 +67,7 @@ public class SignInActivity extends AppCompatActivity {
                     }
                     else {
                         progressDialog.dismiss();
-                        Toast.makeText(SignInActivity.this, "Signing in Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                 }
