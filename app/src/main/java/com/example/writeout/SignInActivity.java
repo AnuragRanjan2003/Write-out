@@ -59,7 +59,6 @@ public class SignInActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                     progressDialog.dismiss();
-                    //Make main activity and mention in explicit intent parameter
                     Intent intent=new Intent(SignInActivity.this,MainActivity.class);
                     intent.putExtra("userid",task.getResult().getUser().getUid());
                     startActivity(intent);
