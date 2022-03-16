@@ -40,24 +40,37 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressDialog.show();
-                mAuth.createUserWithEmailAndPassword(Email.getText().toString(),password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            progressDialog.dismiss();
-                            database.getReference("users").child(task.getResult().getUser().getUid()).child("name").setValue(Username.getText().toString());
-                            database.getReference("users").child(task.getResult().getUser().getUid()).child("id").setValue(task.getResult().getUser().getUid());
-                            database.getReference("users").child(task.getResult().getUser().getUid()).child("password").setValue(password.getText().toString());
-                            startActivity(new Intent(SignUpActivity.this,SignInActivity.class));
-                            finish();
-                        }
-                        else{
-                            progressDialog.dismiss();
-                            Toast.makeText(SignUpActivity.this, "Signing Up Failed", Toast.LENGTH_SHORT).show();
-                        }
+                if(Email.getText().toString().isEmpty()){
+                    Email.setError("Email is Required");
+                    progressDialog.dismiss();
+                }
+                if(password.getText().toString().isEmpty()){
+                    password.setError("Password is Required");
+                    progressDialog.dismiss();
+                }
+                if(Username.getText().toString().isEmpty()){
+                    Username.setError("Username Required");
+                    progressDialog.dismiss();
+                }
+                else {
+                    mAuth.createUserWithEmailAndPassword(Email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                progressDialog.dismiss();
+                                database.getReference("users").child(task.getResult().getUser().getUid()).child("name").setValue(Username.getText().toString());
+                                database.getReference("users").child(task.getResult().getUser().getUid()).child("id").setValue(task.getResult().getUser().getUid());
+                                database.getReference("users").child(task.getResult().getUser().getUid()).child("password").setValue(password.getText().toString());
+                                startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                                finish();
+                            } else {
+                                progressDialog.dismiss();
+                                Toast.makeText(SignUpActivity.this, "Signing Up Failed", Toast.LENGTH_SHORT).show();
+                            }
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
 
