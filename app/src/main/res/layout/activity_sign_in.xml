@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="40dp"
-                    android:fontFamily="casual"
+                    android:fontFamily="@font/days_one"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="@string/write_out"
@@ -57,14 +57,11 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="30dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp">
-
+                    android:layout_marginTop="30dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSignInEmail"
                         android:layout_width="300dp"
-                        android:layout_height="50dp"
+                        android:layout_height="52dp"
                         android:layout_gravity="center"
                         android:hint="@string/email" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +79,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSignInPassword"
                         android:layout_width="300dp"
-                        android:layout_height="50dp"
+                        android:layout_height="52dp"
                         android:layout_gravity="center"
                         android:hint="@string/password" />
                 </com.google.android.material.textfield.TextInputLayout>

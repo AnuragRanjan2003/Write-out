@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-                android:fontFamily="casual"
+                android:fontFamily="@font/days_one"
                 android:text="Write Out"
                 android:textAlignment="center"
                 android:textColor="#FB8C00"
@@ -54,7 +54,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSignUpEmail"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="52dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:hint="Email" />
@@ -71,7 +71,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSignUpUserName"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="52dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:hint="Username" />
@@ -89,7 +89,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSignUpPassword"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="52dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:hint="Password" />
