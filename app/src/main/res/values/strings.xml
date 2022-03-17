@@ -7,4 +7,5 @@
     <string name="new_user_sign_up">New User? Sign Up</string>
     <string name="send_email">Send Email</string>
     <string name="we_ll_send_an_email_to_this_email_you_can_change_you_password_form_there">We\'ll send an Email to this Email. You can change you password form there.</string>
+    <string name="forgot_password">Forgot Password</string>
 </resources>
