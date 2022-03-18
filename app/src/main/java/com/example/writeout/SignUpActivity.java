@@ -23,6 +23,7 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     return;
                 }
+
                 if(password.getText().toString().isEmpty()){
                     password.setError("Password is Required");
                     progressDialog.dismiss();
@@ -63,7 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 database.getReference("users").child(task.getResult().getUser().getUid()).child("name").setValue(Username.getText().toString());
                                 database.getReference("users").child(task.getResult().getUser().getUid()).child("id").setValue(task.getResult().getUser().getUid());
-                                database.getReference("users").child(task.getResult().getUser().getUid()).child("password").setValue(password.getText().toString());
+
                                 startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
                                 finish();
                             } else {

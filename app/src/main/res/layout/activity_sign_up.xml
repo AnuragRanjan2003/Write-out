@@ -57,7 +57,11 @@
                     android:layout_height="52dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:hint="Email" />
+                    android:drawablePadding="7dp"
+                    android:textAlignment="center"
+                    android:hint="Email"
+                    android:drawableLeft="@drawable/ic_baseline_mail_24"
+                    android:drawableTint="@color/baseOrange"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -74,7 +78,12 @@
                     android:layout_height="52dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:hint="Username" />
+
+                    android:textAlignment="center"
+                    android:hint="Username"
+                    android:drawableTint="@color/baseOrange"
+                    android:drawablePadding="7dp"
+                    android:drawableLeft="@drawable/ic_baseline_person_24"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +101,12 @@
                     android:layout_height="52dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:hint="Password" />
+                    android:hint="Password"
+                    android:drawableStart="@drawable/ic_baseline_lock_24"
+                    android:drawablePadding="7dp"
+                    android:inputType="textPassword"
+                    android:textAlignment="center"
+                    android:drawableTint="@color/baseOrange"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -105,6 +119,7 @@
                 android:height="50dp"
                 android:background="@drawable/buttonshape"
                 android:backgroundTint="#FB8C00"
+                android:elevation="3dp"
                 android:text="Sign Up"
                 android:textSize="20sp" />
         </LinearLayout>

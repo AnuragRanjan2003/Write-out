@@ -8,4 +8,10 @@
     <string name="send_email">Send Email</string>
     <string name="we_ll_send_an_email_to_this_email_you_can_change_you_password_form_there">We\'ll send an Email to this Email. You can change you password form there.</string>
     <string name="forgot_password">Forgot Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="your_article">Your Article</string>
+    <string name="log_out">Log out</string>
+    <string name="profile">Profile</string>
+    <string name="compose_article">Compose Article</string>
 </resources>

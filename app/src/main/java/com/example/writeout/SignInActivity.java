@@ -26,6 +26,7 @@ public class SignInActivity extends AppCompatActivity {
     FirebaseDatabase database;
     ProgressDialog progressDialog;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class SignInActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 return;
             }
+
             if(password.getText().toString().isEmpty()){
                 password.setError("Password is Required");
                 progressDialog.dismiss();
@@ -62,7 +64,7 @@ public class SignInActivity extends AppCompatActivity {
                     Intent intent=new Intent(SignInActivity.this,MainActivity.class);
                     intent.putExtra("userid",task.getResult().getUser().getUid());
                     startActivity(intent);
-                    finish();
+
                     }
                     else {
                         progressDialog.dismiss();
