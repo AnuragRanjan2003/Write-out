@@ -13,7 +13,6 @@
         android:id="@+id/TabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_tablayout"
         android:backgroundTint="#FFA500"
 
         app:tabIndicator="@drawable/costom_indicator"
