@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,10 +35,11 @@ public class WritingActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     AppCompatSpinner Spinner;
     EditText postTitle,postCategory,postArticle;
-    Button Post;
+    ExtendedFloatingActionButton Post;
     post post1,post2;
     String AuthorName;
     ProgressDialog progressDialog;
+    int tapCounter=0;
 
 
 
@@ -54,6 +56,8 @@ public class WritingActivity extends AppCompatActivity {
 
         postArticle=findViewById(R.id.PostArticle);
         Post=findViewById(R.id.PostButton);
+        Post.shrink();
+
         progressDialog=new ProgressDialog(WritingActivity.this);
         progressDialog.setMessage("Posting");
         database.getReference("users").child(firebaseUser.getUid()).child("name").addValueEventListener(new ValueEventListener() {
@@ -73,33 +77,36 @@ public class WritingActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                progressDialog.show();
+                tapCounter+=1;
+                if(tapCounter%2==0){
+                    Post.shrink();
+                    progressDialog.show();
 
-                if(postTitle.getText().toString().isEmpty()){
+                     if(postTitle.getText().toString().isEmpty()){
                     postTitle.setError("Please give a Title");
                     progressDialog.dismiss();
                     return;
-                }
-                if(postCategory.getText().toString().isEmpty()){
+                    }
+                    if(postCategory.getText().toString().isEmpty()){
                     postCategory.setError("Please specify Category");
                     progressDialog.dismiss();
                     return;}
-                if(postArticle.getText().toString().isEmpty()){
+                    if(postArticle.getText().toString().isEmpty()){
                     postArticle.setError("Please write something");
                     progressDialog.dismiss();
                     return;
-                }
+                    }
                 
-                if(!postCategory.getText().toString().equals("INFORMATIVE")&&!postCategory.getText().toString().equals("CASUAL")&&!postCategory.getText().toString().equals("POLITICAL")){
+                    if(!postCategory.getText().toString().equals("INFORMATIVE")&&!postCategory.getText().toString().equals("CASUAL")&&!postCategory.getText().toString().equals("POLITICAL")){
                     postCategory.setError("Please give a Valid Category \n Try All Caps");
                     progressDialog.dismiss();
                     return;
-                }
-                else{
-                post1=new post(postArticle.getText().toString(),postCategory.getText().toString(),postTitle.getText().toString());
-                database.getReference("users").child(firebaseUser.getUid()).child("posts").child(postTitle.getText().toString()).setValue(post1);
-                post2=new post(postArticle.getText().toString(), firebaseUser.getUid(),postCategory.getText().toString(),postTitle.getText().toString(),AuthorName);
-                database.getReference("post").child(postTitle.getText().toString()).setValue(post2).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    }
+                    else{
+                    post1=new post(postArticle.getText().toString(),postCategory.getText().toString(),postTitle.getText().toString());
+                    database.getReference("users").child(firebaseUser.getUid()).child("posts").child(postTitle.getText().toString()).setValue(post1);
+                    post2=new post(postArticle.getText().toString(), firebaseUser.getUid(),postCategory.getText().toString(),postTitle.getText().toString(),AuthorName);
+                    database.getReference("post").child(postTitle.getText().toString()).setValue(post2).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
@@ -116,6 +123,10 @@ public class WritingActivity extends AppCompatActivity {
                 });}
 
             }
+            else
+            Post.extend();
+            }
+
         });
     }
 }

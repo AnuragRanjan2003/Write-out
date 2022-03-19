@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager;
     ViewPagerAdapter viewPagerAdapter;
+    int tapCounter=0;
     ExtendedFloatingActionButton fab;
     private String[] titles={"Your Articles","Other Articles","Favourites"};
 
@@ -43,12 +44,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //setSupportActionBar(toolbar);
 
+
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbarcolor)));
         database=FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
        // toolbar=findViewById(R.id.toolbar);
         firebaseUser=mAuth.getCurrentUser();
         fab=findViewById(R.id.floatingActionButton);
+        fab.shrink();
         tabLayout=findViewById(R.id.TabLayout);
         viewPager=findViewById(R.id.ViewPager);
         viewPagerAdapter=new ViewPagerAdapter(MainActivity.this);
@@ -57,7 +60,12 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tapCounter+=1;
+                if(!(tapCounter%2==0))
+                    fab.extend();
+                else{
                 startActivity(new Intent(MainActivity.this,WritingActivity.class));
+                fab.shrink();}
 
             }
         });

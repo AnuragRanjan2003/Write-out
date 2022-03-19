@@ -13,10 +13,16 @@
         android:id="@+id/TabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/baseOrange"
+        android:background="@drawable/custom_tablayout"
+        android:backgroundTint="#FFA500"
+
+        app:tabIndicator="@drawable/costom_indicator"
+        app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@color/white"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/black"
+        app:tabIndicatorGravity="stretch"
+        app:tabIndicatorHeight="0.5dp"
+        app:tabSelectedTextColor="@color/actionbarcolor"
+        app:tabTextColor="@color/white"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2
@@ -35,7 +41,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="70dp"
         android:clickable="true"
-        android:elevation="6dp"
+        android:elevation="20dp"
         android:focusable="true"
         android:text="Compose"
         android:textColor="@color/white"
