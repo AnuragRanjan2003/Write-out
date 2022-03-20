@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Profile"
+       android:layout_marginTop="20dp"
+       android:fontFamily="casual"
+       android:textStyle="bold"
+       android:textColor="@color/baseOrange"
+       android:textSize="40sp"/>
+   <ImageView
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:src="@drawable/profileImage"
+    android:layout_marginTop="20dp"
+    android:id="@+id/ivProfileImage"
+    android:elevation="10dp"   />
+
+   <EditText
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text=""
+       android:background="null"
+       android:textStyle="bold"
+       android:textColor="@color/black"
+       android:textSize="25sp"
+       android:id="@+id/etProfileUsername"
+       android:layout_marginTop="70dp"/>
+   <EditText
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/etProfileEmail"
+       android:textSize="20sp"
+       android:background="transparent"
+       android:layout_marginTop="20dp"
+       android:textColor="@color/black"/>
+   <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:backgroundTint="#8E24AA"
+       android:text="Apply Changes"
+       android:textColor="@color/white"
+       android:layout_marginTop="50dp"
+       app:icon="@drawable/ic_baseline_done_24"
+       app:iconTint="@color/white"
+       android:id="@+id/fabApplyChanges"/>
+</LinearLayout>

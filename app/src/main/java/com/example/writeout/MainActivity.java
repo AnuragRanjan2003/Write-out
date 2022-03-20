@@ -2,10 +2,12 @@ package com.example.writeout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
 
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbarcolor)));
@@ -57,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter=new ViewPagerAdapter(MainActivity.this);
         viewPager.setAdapter(viewPagerAdapter);
         new TabLayoutMediator(tabLayout,viewPager,((tab, position) -> tab.setText(titles[position]))).attach();
+        if(firebaseUser==null){
+            startActivity(new Intent(MainActivity.this,SignInActivity.class));
+        }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,29 +76,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.menu1,menu);
+        if(menu instanceof MenuBuilder){
+            MenuBuilder menuBuilder=(MenuBuilder) menu;
+            menuBuilder.setOptionalIconsVisible(true);
+        }
         return true;
     }
 
     @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.itemLogOut: startActivity(new Intent(MainActivity.this,SignInActivity.class));
+            case R.id.itemLogOut:
+                                mAuth.signOut();
+                                Intent intent=new Intent(MainActivity.this,SignInActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                        Toast.makeText(this, "You Logged out", Toast.LENGTH_LONG).show();
+                                        return true;
 
             case R.id.itemProfile: return true;
-            case R.id.ShareIcon:
-                Intent intent=new Intent();
-                intent.setAction(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra("share message","Try out this app");
-                startActivity(intent);
+            case R.id.itemShare:
+                Intent intent2=new Intent();
+                intent2.setAction(Intent.ACTION_SEND);
+                intent2.setType("text/plain");
+                intent2.putExtra(Intent.EXTRA_TEXT,"Try out Write Out app");
+                startActivity(intent2);
+                return true;
+                }
+                return  super.onContextItemSelected(item);
+            }
 
-        }
-        return  super.onContextItemSelected(item);
 
-    }
 
 }

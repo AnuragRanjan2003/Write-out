@@ -7,14 +7,11 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".MainActivity">
-
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/TabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:backgroundTint="#FFA500"
-
         app:tabIndicator="@drawable/costom_indicator"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@color/white"

@@ -62,7 +62,6 @@ public class SignInActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                     progressDialog.dismiss();
                     Intent intent=new Intent(SignInActivity.this,MainActivity.class);
-                    intent.putExtra("userid",task.getResult().getUser().getUid());
                     startActivity(intent);
 
                     }

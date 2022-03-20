@@ -4,15 +4,19 @@
     <item
         android:id="@+id/itemLogOut"
         app:showAsAction="never"
-        android:title="@string/log_out"/>
+        android:icon="@drawable/ic_baseline_power_settings_new_24"
+        android:iconTint="@color/baseOrange"
+        android:title="@string/log_out" />
     <item
         android:id="@+id/itemProfile"
         android:title="@string/profile"
-        app:showAsAction="never"/>
+        app:showAsAction="never"
+        android:icon="@drawable/ic_baseline_person_outline_24"
+        android:iconTint="@color/baseOrange" />
    <item
-        android:id="@+id/ShareIcon"
+        android:id="@+id/itemShare"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_share_white"
-        android:title="itemShare"/>
+        android:title="itemShare" />
 
 </menu>
