@@ -19,29 +19,68 @@
    <ImageView
     android:layout_width="200dp"
     android:layout_height="200dp"
-    android:src="@drawable/profileImage"
+    android:src="@drawable/man"
     android:layout_marginTop="20dp"
     android:id="@+id/ivProfileImage"
     android:elevation="10dp"   />
 
-   <EditText
-       android:layout_width="wrap_content"
+   <com.google.android.material.textfield.TextInputEditText
+       android:id="@+id/etProfileUsername"
+       android:layout_width="200dp"
        android:layout_height="wrap_content"
+       android:textAlignment="center"
+
+       android:layout_marginTop="40dp"
+       android:layout_marginBottom="40dp"
        android:text=""
-       android:background="null"
-       android:textStyle="bold"
        android:textColor="@color/black"
        android:textSize="25sp"
-       android:id="@+id/etProfileUsername"
-       android:layout_marginTop="70dp"/>
-   <EditText
+       android:textStyle="bold"
+       tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+   <TextView
        android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:id="@+id/etProfileEmail"
+       android:layout_height="match_parent"
+       android:textAlignment="center"
+       android:text="Email address"
+       android:textStyle="bold"
        android:textSize="20sp"
-       android:background="transparent"
-       android:layout_marginTop="20dp"
+       android:layout_marginLeft="30dp"
        android:textColor="@color/black"/>
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:id="@+id/etProfileEmail"
+       android:textSize="14sp"
+       android:textAlignment="center"
+       android:layout_marginLeft="20dp"
+       android:textColor="@color/black"/>
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="20dp">
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:text="User Id"
+       android:layout_marginLeft="40dp"
+       android:layout_marginRight="20dp"
+       android:textSize="20sp"
+       android:textStyle="bold"
+       android:textColor="@color/black"/>
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:id="@+id/tvProfileUid"
+       android:layout_marginTop="0dp"
+       android:textAlignment="center"
+       android:textColor="@color/black"/>
+</LinearLayout>
    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"

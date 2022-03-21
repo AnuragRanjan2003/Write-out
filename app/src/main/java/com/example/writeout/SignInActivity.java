@@ -63,6 +63,7 @@ public class SignInActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     Intent intent=new Intent(SignInActivity.this,MainActivity.class);
                     startActivity(intent);
+                    finish();
 
                     }
                     else {

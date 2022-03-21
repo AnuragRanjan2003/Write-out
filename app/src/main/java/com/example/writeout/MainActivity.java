@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -31,7 +33,6 @@ import java.util.zip.Inflater;
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseUser firebaseUser;
-    Toolbar toolbar;
     FirebaseAuth mAuth;
     TabLayout tabLayout;
     ViewPager2 viewPager;
@@ -45,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // setSupportActionBar(toolbar);
-
-
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbarcolor)));
         database=FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
@@ -62,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout,viewPager,((tab, position) -> tab.setText(titles[position]))).attach();
         if(firebaseUser==null){
             startActivity(new Intent(MainActivity.this,SignInActivity.class));
+            finish();
         }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +94,16 @@ public class MainActivity extends AppCompatActivity {
             case R.id.itemLogOut:
                                 mAuth.signOut();
                                 Intent intent=new Intent(MainActivity.this,SignInActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         Toast.makeText(this, "You Logged out", Toast.LENGTH_LONG).show();
+                                        finish();
                                         return true;
 
-            case R.id.itemProfile: return true;
+            case R.id.itemProfile:
+                startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                return true;
             case R.id.itemShare:
                 Intent intent2=new Intent();
                 intent2.setAction(Intent.ACTION_SEND);
