@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SpinnerAdapter;
@@ -26,20 +27,27 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
 
 public class WritingActivity extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
-    AppCompatSpinner Spinner;
-    EditText postTitle,postCategory,postArticle;
+    AutoCompleteTextView act;
+    EditText postTitle,postArticle;
     ExtendedFloatingActionButton Post;
     post post1,post2;
     String AuthorName;
+    String Category;
+    ArrayList<String> CategoryList=new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter;
     ProgressDialog progressDialog;
     int tapCounter=0;
+    String date ;
 
 
 
@@ -52,7 +60,14 @@ public class WritingActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         firebaseUser=mAuth.getCurrentUser();
         postTitle=findViewById(R.id.PostTitle);
-        postCategory=findViewById(R.id.PostCategory);
+        date=new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        act=findViewById(R.id.act_Category);
+             //Drop down menu
+        CategoryList.add("Informative");
+        CategoryList.add("Casual");
+        CategoryList.add("Political");
+        arrayAdapter=new ArrayAdapter<>(getApplicationContext(), com.airbnb.lottie.R.layout.support_simple_spinner_dropdown_item,CategoryList);
+        act.setAdapter(arrayAdapter);
 
         postArticle=findViewById(R.id.PostArticle);
         Post=findViewById(R.id.PostButton);
@@ -72,6 +87,20 @@ public class WritingActivity extends AppCompatActivity {
                 Toast.makeText(WritingActivity.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
 
             }
+
+        });
+        act.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i==0)
+                    Category="Informative";
+                else if(i==1)
+                    Category="Casual";
+                else if(i==2)
+                    Category="Political";
+
+
+            }
         });
         Post.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -87,8 +116,8 @@ public class WritingActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     return;
                     }
-                    if(postCategory.getText().toString().isEmpty()){
-                    postCategory.setError("Please specify Category");
+                    if(Category==null){
+                    act.setError("Please specify Category");
                     progressDialog.dismiss();
                     return;}
                     if(postArticle.getText().toString().isEmpty()){
@@ -96,16 +125,10 @@ public class WritingActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     return;
                     }
-                
-                    if(!postCategory.getText().toString().equals("INFORMATIVE")&&!postCategory.getText().toString().equals("CASUAL")&&!postCategory.getText().toString().equals("POLITICAL")){
-                    postCategory.setError("Please give a Valid Category \n Try All Caps");
-                    progressDialog.dismiss();
-                    return;
-                    }
                     else{
-                    post1=new post(postArticle.getText().toString(),postCategory.getText().toString(),postTitle.getText().toString());
+                    post1=new post(postArticle.getText().toString(),Category,postTitle.getText().toString(),date);
                     database.getReference("users").child(firebaseUser.getUid()).child("posts").child(postTitle.getText().toString()).setValue(post1);
-                    post2=new post(postArticle.getText().toString(), firebaseUser.getUid(),postCategory.getText().toString(),postTitle.getText().toString(),AuthorName);
+                    post2=new post(postArticle.getText().toString(), firebaseUser.getUid(),Category,postTitle.getText().toString(),AuthorName,date);
                     database.getReference("post").child(postTitle.getText().toString()).setValue(post2).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

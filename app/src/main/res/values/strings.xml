@@ -14,4 +14,5 @@
     <string name="log_out">Log out</string>
     <string name="profile">Profile</string>
     <string name="compose_article">Compose Article</string>
+    <string name="submit">submit</string>
 </resources>

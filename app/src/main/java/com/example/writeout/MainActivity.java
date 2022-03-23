@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -35,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseAuth mAuth;
     TabLayout tabLayout;
-    ViewPager2 viewPager;
-    ViewPagerAdapter viewPagerAdapter;
+    ViewPager viewPager;
+    PagerAdapter PagerAdapter;
     int tapCounter=0;
     ExtendedFloatingActionButton fab;
     private String[] titles={"Your Articles","Other Articles","Favourites"};
@@ -55,9 +56,12 @@ public class MainActivity extends AppCompatActivity {
         fab.shrink();
         tabLayout=findViewById(R.id.TabLayout);
         viewPager=findViewById(R.id.ViewPager);
-        viewPagerAdapter=new ViewPagerAdapter(MainActivity.this);
-        viewPager.setAdapter(viewPagerAdapter);
-        new TabLayoutMediator(tabLayout,viewPager,((tab, position) -> tab.setText(titles[position]))).attach();
+        tabLayout.setupWithViewPager(viewPager);
+        PagerAdapter=new PagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        PagerAdapter.addFragment(new YourArticleFragment(),"Your Articles");
+        PagerAdapter.addFragment(new OtherArticlesFragment(),"Other Articles");
+        PagerAdapter.addFragment(new FavouritesFragment(),"Favourite");
+        viewPager.setAdapter(PagerAdapter);
         if(firebaseUser==null){
             startActivity(new Intent(MainActivity.this,SignInActivity.class));
             finish();

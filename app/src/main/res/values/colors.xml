@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="actionbarcolor">#ED6442</color>
     <color name="baseOrange">#FB8C00</color>
+    <color name="fragmenttint">#010F61</color>
 
 </resources>

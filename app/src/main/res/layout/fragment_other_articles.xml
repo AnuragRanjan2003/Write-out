@@ -5,11 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".OtherArticlesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textview2"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_other_articles"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Other Articles" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

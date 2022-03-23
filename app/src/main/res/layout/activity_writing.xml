@@ -44,24 +44,27 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/PostTitle"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:hint="Title"
                     android:inputType="text|textCapWords" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/PostCategory"
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/act_Category"
                     android:layout_width="300dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:hint="Category"
-                    android:inputType="text|textCapWords" />
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -82,24 +85,12 @@
                     android:textAlignment="textStart" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!--<Button
-                android:id="@+id/PostButton"
+            <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginBottom="50dp"
-                android:text="post"
-                android:drawableTint="@color/white"
-                android:gravity="center"
-                android:drawableEnd="@drawable/ic_baseline_send_24"
-                android:drawablePadding="0dp"
-                android:textSize="18sp"/>-->
-
-
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/orangebottomtransmodified2" />
         </LinearLayout>
     </ScrollView>
 

@@ -3,40 +3,32 @@ package com.example.writeout;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OtherArticlesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class OtherArticlesFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    RecyclerView recyclerView;
+    MyAdapter2 myAdapter2;
     private String mParam1;
     private String mParam2;
 
     public OtherArticlesFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OtherArticlesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static OtherArticlesFragment newInstance(String param1, String param2) {
         OtherArticlesFragment fragment = new OtherArticlesFragment();
         Bundle args = new Bundle();
@@ -52,6 +44,7 @@ public class OtherArticlesFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -59,6 +52,34 @@ public class OtherArticlesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_other_articles, container, false);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        View view = inflater.inflate(R.layout.fragment_other_articles, container, false);
+        recyclerView = view.findViewById(R.id.rec_other_articles);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        FirebaseRecyclerOptions<model> options =
+                new FirebaseRecyclerOptions.Builder<model>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference("post"), model.class)
+                        .build();
+        myAdapter2 = new MyAdapter2(options);
+        recyclerView.setAdapter(myAdapter2);
+        return view;
+
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        myAdapter2.startListening();
+    }
+
+    @Override
+    public void onStop() {
+
+        super.onStop();
+        myAdapter2.stopListening();
+    }
+
+
 }

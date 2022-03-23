@@ -1,7 +1,21 @@
 package com.example.writeout;
 
 public class post {
-    String Article, Author,Category,Title,AuthorName;
+    String Article;
+    String Author;
+    String Category;
+    String Title;
+    String AuthorName;
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    String Date;
     public post() {}
 
     public String getArticle() {
@@ -44,16 +58,18 @@ public class post {
         AuthorName = authorName;
     }
 
-    public post(String article, String author, String category, String title, String authorName) {
+    public post(String article, String author, String category, String title, String authorName,String date) {
         Article = article;
         Author = author;
         Category = category;
         Title = title;
         AuthorName=authorName;
+        Date=date;
     }
-    public post(String article,  String category, String title) {
+    public post(String article,  String category, String title,String date) {
         Article = article;
         Category = category;
         Title = title;
+        Date=date;
     }
 }
