@@ -20,10 +20,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MyAdapter2 extends FirebaseRecyclerAdapter<model, MyAdapter2.myviewholder> {
+public class MyAdapter3 extends FirebaseRecyclerAdapter<model, MyAdapter3.myviewholder> {
 
 
-    public MyAdapter2(@NonNull FirebaseRecyclerOptions<model> options) {
+    public MyAdapter3(@NonNull FirebaseRecyclerOptions<model> options) {
         super(options);
     }
 
@@ -37,14 +37,6 @@ public class MyAdapter2 extends FirebaseRecyclerAdapter<model, MyAdapter2.myview
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
-        database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    currentUserName = String.valueOf(task.getResult().getValue());
-                }
-            }
-        });
         holder.displaytitle.setText(model.getTitle());
         holder.displayauthor.setText(model.getAuthorName());
         holder.displaycategory.setText(model.getCategory());
@@ -53,11 +45,11 @@ public class MyAdapter2 extends FirebaseRecyclerAdapter<model, MyAdapter2.myview
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity=(AppCompatActivity)view.getContext();
-                Intent intent=new Intent(activity,ArticleDisplayActivity.class);
-                intent.putExtra("Title2",model.getTitle());
-                intent.putExtra("Category2",model.getCategory());
-                intent.putExtra("Author2",model.getAuthorName());
-                intent.putExtra("Date2",model.getDate());
+                Intent intent=new Intent(activity,FavDisplayActivity.class);
+                intent.putExtra("Title3",model.getTitle());
+                intent.putExtra("Category3",model.getCategory());
+                intent.putExtra("Author3",model.getAuthorName());
+                intent.putExtra("Date3",model.getDate());
                 activity.startActivity(intent);
 
             }

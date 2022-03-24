@@ -8,7 +8,8 @@
     android:elevation="10dp"
     app:cardCornerRadius="20dp"
     app:cardUseCompatPadding="true"
-    tools:ignore="MissingClass">
+    tools:ignore="MissingClass"
+    android:id="@+id/cardview2">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WriteOut">
         <activity
+            android:name=".FavDisplayActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".ArticleDisplayActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".YourArticleDisplayActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="true"
             android:parentActivityName=".MainActivity" />

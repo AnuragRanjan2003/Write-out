@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -24,12 +25,15 @@ public class MyAdapter extends FirebaseRecyclerAdapter<model,MyAdapter.myviewhol
                 holder.displaytitle.setText(model.getTitle());
                 holder.displaycategory.setText(model.getCategory());
                 holder.displaydate.setText(model.getDate());
-                holder.displaytitle.setOnClickListener(new View.OnClickListener() {
+                holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         AppCompatActivity activity=(AppCompatActivity)view.getContext();
-                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.ViewPager,new yourArticleDisplayFragment(model.getTitle(),model.getCategory())).addToBackStack(null).commit();
-
+                        Intent intent=new Intent(activity,YourArticleDisplayActivity.class);
+                        intent.putExtra("title",model.getTitle());
+                        intent.putExtra("category",model.getCategory());
+                        intent.putExtra("date",model.getDate());
+                        activity.startActivity(intent);
 
                     }
                 });
@@ -45,12 +49,14 @@ public class MyAdapter extends FirebaseRecyclerAdapter<model,MyAdapter.myviewhol
 
     public class myviewholder extends RecyclerView.ViewHolder{
         TextView displaytitle,displaycategory,displaydate;
+        CardView cardView;
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
             displaytitle=itemView.findViewById(R.id.display_title);
             displaycategory=itemView.findViewById(R.id.display_category);
             displaydate=itemView.findViewById(R.id.display_date);
+            cardView=itemView.findViewById(R.id.cardview1);
         }
     }
 }

@@ -66,7 +66,7 @@ public class YourArticleFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_your_article, container, false);
         recyclerView = view.findViewById(R.id.rec_your_articles);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManagerWrapper(getContext(),LinearLayoutManager.VERTICAL,false));
 
         FirebaseRecyclerOptions<model> options =
                 new FirebaseRecyclerOptions.Builder<model>()
