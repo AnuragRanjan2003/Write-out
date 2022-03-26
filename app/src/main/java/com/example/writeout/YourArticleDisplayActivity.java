@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 public class YourArticleDisplayActivity extends AppCompatActivity {
-    String Title, Category,Date;
+    String Title, Category,Date,Author;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
@@ -31,6 +31,7 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
     ExtendedFloatingActionButton parentFab, editFab, deleteFab, favFab;
     Boolean parentFabIsOpen = false;
     String prevArticle;
+    post post;
 
 
     @Override
@@ -57,6 +58,12 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
         Category = intent3.getStringExtra("category");
         Intent intent4=getIntent();
         Date=intent4.getStringExtra("date");
+        database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Author=String.valueOf(task.getResult().getValue());
+            }
+        });
 
         title.setText(Title);
         category.setText(Category);
@@ -70,6 +77,7 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
                 }
             }
         });
+
         parentFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,6 +134,23 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
                         }     
                     }
                 });
+            }
+        });
+        post=new post(prevArticle,firebaseUser.getUid(),Category,Title,Author,Date);
+        favFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                database.getReference("users").child(firebaseUser.getUid()).child("fav").child(Title).setValue(post);
+                database.getReference("users").child(firebaseUser.getUid()).child("fav").child(Title).child("authorName").setValue(Author)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(YourArticleDisplayActivity.this, "Added to Favourite", Toast.LENGTH_SHORT).show();
+                                }
+                                
+                            }
+                        });
             }
         });
 

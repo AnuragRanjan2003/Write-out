@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,6 +40,7 @@ public class FavDisplayActivity extends AppCompatActivity {
         author=findViewById(R.id.tv_author3);
         date=findViewById(R.id.tv_date3);
         article=findViewById(R.id.etarticle3);
+        unFav=findViewById(R.id.unfavfab);
         Intent intent=getIntent();
         Title=intent.getStringExtra("Title3");
         title.setText(Title);
@@ -51,6 +54,21 @@ public class FavDisplayActivity extends AppCompatActivity {
                     article.setText(String.valueOf(task.getResult().getValue()));
                 }
 
+            }
+        });
+        unFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                database.getReference("users").child(firebaseUser.getUid()).child("fav").child(Title).removeValue()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(FavDisplayActivity.this, "Removed from Favourite", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(FavDisplayActivity.this,MainActivity.class));
+                                }
+                            }
+                        });
             }
         });
 

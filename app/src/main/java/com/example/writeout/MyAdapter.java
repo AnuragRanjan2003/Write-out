@@ -33,6 +33,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<model,MyAdapter.myviewhol
                         intent.putExtra("title",model.getTitle());
                         intent.putExtra("category",model.getCategory());
                         intent.putExtra("date",model.getDate());
+                        intent.putExtra("author",model.getAuthorName());
                         activity.startActivity(intent);
 
                     }

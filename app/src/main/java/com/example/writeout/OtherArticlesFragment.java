@@ -2,6 +2,7 @@ package com.example.writeout;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class OtherArticlesFragment extends Fragment {
@@ -22,6 +26,7 @@ public class OtherArticlesFragment extends Fragment {
 
     RecyclerView recyclerView;
     MyAdapter2 myAdapter2;
+    String currentAuthorName;
     private String mParam1;
     private String mParam2;
 
@@ -55,6 +60,15 @@ public class OtherArticlesFragment extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    currentAuthorName=String.valueOf(task.getResult().getValue());
+                }
+
+            }
+        });
         View view = inflater.inflate(R.layout.fragment_other_articles, container, false);
         recyclerView = view.findViewById(R.id.rec_other_articles);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
