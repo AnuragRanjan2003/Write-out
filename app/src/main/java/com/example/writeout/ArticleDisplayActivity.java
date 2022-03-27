@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ArticleDisplayActivity extends AppCompatActivity {
     TextView Title,Category,Date,Author;
-    EditText Article;
+    TextView Article;
     ExtendedFloatingActionButton favFab;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
@@ -86,7 +86,7 @@ public class ArticleDisplayActivity extends AppCompatActivity {
     }
     public void onBackPressed(){
         startActivity(new Intent(this,MainActivity.class));
-        finish();
+        finishAffinity();
     }
 
 }

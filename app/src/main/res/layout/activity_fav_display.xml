@@ -131,25 +131,19 @@
 
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
-                android:outlineSpotShadowColor="@color/baseOrange">
 
-                <com.google.android.material.textfield.TextInputEditText
+
+                <TextView
                     android:id="@+id/etarticle3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:editable="false"
                     android:textSize="18sp"
                     android:hint="Article"
                     tools:ignore="Deprecated" />
-            </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -168,7 +162,7 @@
         android:clickable="true"
         android:elevation="10dp"
         android:text="unfavourite"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginRight="40dp"
         android:textColor="@color/white"
         app:icon="@drawable/ic_baseline_cancel_24"

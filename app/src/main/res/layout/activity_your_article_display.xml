@@ -103,23 +103,18 @@
 
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etarticle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="50dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="0dp"
-                android:outlineSpotShadowColor="@color/baseOrange">
+                android:layout_marginRight="10dp"
+                android:hint="Article"
+                android:minHeight="48dp"
+                android:textSize="18sp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etarticle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Article"
-                    android:textSize="18sp" />
-            </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>
@@ -135,6 +130,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="end"
         android:layout_marginTop="5dp"
+        android:visibility="invisible"
 
         android:layout_marginRight="30dp"
         android:layout_marginBottom="260dp"
@@ -151,6 +147,7 @@
         android:layout_height="wrap_content"
         android:text="Favourite"
         android:textColor="@color/white"
+        android:visibility="invisible"
         android:layout_gravity="end"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="190dp"
@@ -174,30 +171,28 @@
         android:layout_alignParentBottom="true"
         android:backgroundTint="#E53935"
         android:elevation="10dp"
+        android:visibility="invisible"
         android:text="Delete"
         android:textColor="@color/white"
         app:icon="@drawable/ic_baseline_delete_24"
         app:iconTint="@color/white" />
 
 
-
-
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/parentfab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginRight="70dp"
-            android:layout_marginBottom="50dp"
-            android:backgroundTint="@color/fragmenttint"
-            android:elevation="10dp"
-            android:clickable="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            app:iconTint="@color/white"
-            android:contentDescription="@string/submit"
-            app:icon="@drawable/ic_baseline_add_24"/>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/parentfab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/fragmenttint"
+        android:clickable="true"
+        android:contentDescription="@string/submit"
+        android:elevation="10dp"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:iconTint="@color/white" />
 
 
 </RelativeLayout>

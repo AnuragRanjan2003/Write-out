@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
     Boolean parentFabIsOpen = false;
     String prevArticle;
     post post;
+    Animation FabOpen,FabClose,FabClock,FabAntiClock;
 
 
     @Override
@@ -58,6 +61,10 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
         Category = intent3.getStringExtra("category");
         Intent intent4=getIntent();
         Date=intent4.getStringExtra("date");
+        FabOpen= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_open);
+        FabClose= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
+        FabClock= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_clock);
+        FabAntiClock= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_anticlock);
         database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -82,14 +89,16 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!parentFabIsOpen) {
-                    editFab.setVisibility(View.VISIBLE);
-                    deleteFab.setVisibility(View.VISIBLE);
-                    favFab.setVisibility(View.VISIBLE);
+                    editFab.startAnimation(FabOpen);
+                    deleteFab.startAnimation(FabOpen);
+                    favFab.startAnimation(FabOpen);
+                    parentFab.startAnimation(FabClock);
                     parentFabIsOpen = true;
                 } else {
-                    editFab.setVisibility(View.INVISIBLE);
-                    deleteFab.setVisibility(View.INVISIBLE);
-                    favFab.setVisibility(View.INVISIBLE);
+                    editFab.startAnimation(FabClose);
+                    deleteFab.startAnimation(FabClose);
+                    favFab.startAnimation(FabClose);
+                    parentFab.startAnimation(FabAntiClock);
                     parentFabIsOpen = false;
 
                 }
@@ -158,7 +167,7 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
     }
     public void onBackPressed(){
         startActivity(new Intent(YourArticleDisplayActivity.this,MainActivity.class));
-        finish();
+        finishAffinity();
 
     }
 }

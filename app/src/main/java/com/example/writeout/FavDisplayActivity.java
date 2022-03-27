@@ -20,10 +20,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class FavDisplayActivity extends AppCompatActivity {
-    TextView title,category,date,author;
-    EditText article;
+    TextView title, category, date, author;
+    TextView article;
     ExtendedFloatingActionButton unFav;
-    String Title,Category,Author,Date;
+    String Title, Category, Author, Date;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
@@ -32,17 +32,17 @@ public class FavDisplayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav_display);
-        database=FirebaseDatabase.getInstance();
-        mAuth=FirebaseAuth.getInstance();
-        firebaseUser=mAuth.getCurrentUser();
-        title=findViewById(R.id.tv_title3);
-        category=findViewById(R.id.tv_category3);
-        author=findViewById(R.id.tv_author3);
-        date=findViewById(R.id.tv_date3);
-        article=findViewById(R.id.etarticle3);
-        unFav=findViewById(R.id.unfavfab);
-        Intent intent=getIntent();
-        Title=intent.getStringExtra("Title3");
+        database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
+        title = findViewById(R.id.tv_title3);
+        category = findViewById(R.id.tv_category3);
+        author = findViewById(R.id.tv_author3);
+        date = findViewById(R.id.tv_date3);
+        article = findViewById(R.id.etarticle3);
+        unFav = findViewById(R.id.unfavfab);
+        Intent intent = getIntent();
+        Title = intent.getStringExtra("Title3");
         title.setText(Title);
         author.setText(intent.getStringExtra("Author3"));
         date.setText(intent.getStringExtra("Date3"));
@@ -50,9 +50,13 @@ public class FavDisplayActivity extends AppCompatActivity {
         database.getReference("post").child(Title).child("article").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(task.isSuccessful()){
-                    article.setText(String.valueOf(task.getResult().getValue()));
+                if (task.isSuccessful()) {
+                    if (!(String.valueOf(task.getResult().getValue()).equals("null")))
+                        article.setText(String.valueOf(task.getResult().getValue()));
+                    else
+                        article.setText("Article was deleted");
                 }
+
 
             }
         });
@@ -63,9 +67,9 @@ public class FavDisplayActivity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Toast.makeText(FavDisplayActivity.this, "Removed from Favourite", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(FavDisplayActivity.this,MainActivity.class));
+                                    startActivity(new Intent(FavDisplayActivity.this, MainActivity.class));
                                 }
                             }
                         });
@@ -73,5 +77,9 @@ public class FavDisplayActivity extends AppCompatActivity {
         });
 
 
+    }
+    public void onBackPressed(){
+        startActivity(new Intent(FavDisplayActivity.this,MainActivity.class));
+        finishAffinity();
     }
 }
