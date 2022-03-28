@@ -21,27 +21,29 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:padding="10dp"
+                android:background="@drawable/customtitle"
                 android:elevation="10dp"
-                android:background="@drawable/customtitle">
+                android:orientation="vertical"
+                android:padding="10dp">
+
                 <TextView
                     android:id="@+id/tv_title2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Title"
-                    android:textColor="@color/white"
-                    android:padding="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:text="Title"
                     android:textAlignment="center"
+                    android:textColor="@color/white"
                     android:textSize="36sp"
                     android:textStyle="bold" />
 
@@ -57,9 +59,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:text="Category :"
-                        android:textSize="20sp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_category2"
@@ -71,6 +73,7 @@
                         android:textSize="18sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -83,9 +86,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:text="Author :"
-                        android:textSize="20sp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_author"
@@ -97,6 +100,7 @@
                         android:textSize="18sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,9 +113,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:text="Publication Date:"
-                        android:textSize="20sp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_date2"
@@ -125,10 +129,6 @@
                 </LinearLayout>
 
 
-
-
-
-
             </LinearLayout>
 
 
@@ -137,15 +137,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
                 android:editable="false"
+                android:fontFamily="serif"
                 android:hint="Article"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 tools:ignore="Deprecated,TouchTargetSizeCheck" />
-
-
-
 
 
         </LinearLayout>
@@ -158,12 +157,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="#1E88E5"
         android:clickable="true"
         android:elevation="10dp"
         android:text="Favourite"
-        android:layout_marginBottom="50dp"
-        android:layout_marginRight="40dp"
         android:textColor="@color/white"
         app:icon="@drawable/ic_baseline_star_24"
         app:iconTint="@color/white"

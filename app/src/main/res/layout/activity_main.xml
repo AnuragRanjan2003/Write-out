@@ -7,31 +7,37 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".MainActivity">
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/TabLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="47dp"
         android:backgroundTint="#FFA500"
         app:tabIndicator="@drawable/costom_indicator"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@color/white"
         app:tabIndicatorGravity="stretch"
+        android:paddingTop="2.5dp"
+        android:paddingBottom="2.5dp"
         app:tabIndicatorHeight="0.5dp"
         app:tabSelectedTextColor="@color/actionbarcolor"
         app:tabTextColor="@color/white"
-        tools:ignore="SpeakableTextPresentCheck" >
+        tools:ignore="SpeakableTextPresentCheck">
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Your Articles"/>
+            android:text="Your Articles" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Other Articles"/>
+            android:text="Other Articles" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Favourites"/>
+            android:text="Favourites" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager

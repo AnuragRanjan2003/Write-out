@@ -6,8 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="MissingClass"
     app:cardCornerRadius="10dp"
+    android:layout_marginBottom="5dp"
     android:elevation="10dp"
     android:id="@+id/cardview1"
+    android:backgroundTint="@color/baseOrange"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     app:cardUseCompatPadding="true">
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +31,7 @@
 
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
-            android:textColor="@color/baseOrange"/>
+            android:textColor="@color/white"/>
 
 
 
@@ -42,7 +47,7 @@
                 android:textSize="20sp"
                 android:layout_marginLeft="25dp"
                 android:textStyle="bold"
-                android:textColor="@color/baseOrange"/>
+                android:textColor="@color/white"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -51,7 +56,7 @@
                 android:textSize="17sp"
                 android:layout_marginRight="50dp"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/baseOrange"/>
+                android:textColor="@color/white"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,14 +70,14 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="25dp"
-                android:textColor="@color/baseOrange"/>
+                android:textColor="@color/white"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="date"
                 android:id="@+id/display_date"
                 android:layout_marginLeft="25dp"
-                android:textColor="@color/baseOrange"/>
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 

@@ -143,6 +143,8 @@
                     android:editable="false"
                     android:textSize="18sp"
                     android:hint="Article"
+                    android:fontFamily="serif"
+                    android:textColor="@color/black"
                     tools:ignore="Deprecated" />
 
 

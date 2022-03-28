@@ -7,7 +7,11 @@
     android:layout_marginBottom="5dp"
     android:elevation="10dp"
     app:cardCornerRadius="20dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
     app:cardUseCompatPadding="true"
+    android:backgroundTint="@color/baseOrange"
     tools:ignore="MissingClass"
     android:id="@+id/cardview2">
 
@@ -24,6 +28,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:text="Title"
+            android:textColor="@color/white"
             android:textAlignment="viewStart"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -41,6 +46,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:text="Author"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -51,6 +57,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:text="authorName"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -65,6 +72,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
                 android:text="Category"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -75,6 +83,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:text="category"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -89,6 +98,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
                 android:text="Date of publication"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -97,7 +107,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
-                android:text="date" />
+                android:text="date"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
