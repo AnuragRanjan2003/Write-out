@@ -64,7 +64,8 @@
                     android:inputType="none"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:editable="false"
+                    tools:ignore="Deprecated,SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
