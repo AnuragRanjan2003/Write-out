@@ -1,83 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:ignore="MissingClass"
-    app:cardCornerRadius="10dp"
-    android:layout_marginBottom="5dp"
-    android:elevation="10dp"
-    android:id="@+id/cardview1"
-    android:backgroundTint="@color/baseOrange"
-    android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
-    app:cardUseCompatPadding="true">
+    android:layout_marginBottom="5dp"
+    android:backgroundTint="@color/baseOrange"
+    android:elevation="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true"
+    tools:ignore="MissingClass">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/display_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Title"
-            android:id="@+id/display_title"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:layout_marginLeft="20dp"
-
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
-            android:textColor="@color/white"/>
+            android:text="Title"
+            android:textAlignment="center"
 
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
                 android:text="Category"
+                android:textColor="@color/white"
                 android:textSize="20sp"
-                android:layout_marginLeft="25dp"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:textStyle="bold" />
+
             <TextView
+                android:id="@+id/display_category"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="category"
-                android:id="@+id/display_category"
-                android:textSize="17sp"
-                android:layout_marginRight="50dp"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/white"/>
+                android:layout_marginRight="50dp"
+                android:text="category"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
                 android:text="Date of publication"
+                android:textColor="@color/white"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="25dp"
-                android:textColor="@color/white"/>
+                android:textStyle="bold" />
+
             <TextView
+                android:id="@+id/display_date"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="date"
-                android:id="@+id/display_date"
                 android:layout_marginLeft="25dp"
-                android:textColor="@color/white"/>
+                android:text="date"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

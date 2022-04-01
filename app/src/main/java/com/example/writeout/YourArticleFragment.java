@@ -1,8 +1,8 @@
 package com.example.writeout;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,18 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class YourArticleFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
+    FirebaseDatabase database;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -32,6 +35,7 @@ public class YourArticleFragment extends Fragment {
     private String mParam2;
     RecyclerView recyclerView;
     MyAdapter myAdapter;
+    ArrayList<model> articleList;
 
     public YourArticleFragment() {
         // Required empty public constructor
@@ -62,17 +66,30 @@ public class YourArticleFragment extends Fragment {
                              Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
+        database = FirebaseDatabase.getInstance();
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_your_article, container, false);
         recyclerView = view.findViewById(R.id.rec_your_articles);
-        recyclerView.setLayoutManager(new LinearLayoutManagerWrapper(getContext(),LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManagerWrapper(getContext(), LinearLayoutManager.VERTICAL, false));
+        articleList = new ArrayList<>();
+        database.getReference("users").child(firebaseUser.getUid()).child("posts").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    model Model = snapshot1.getValue(model.class);
+                    articleList.add(Model);
+                }
+                myAdapter.notifyDataSetChanged();
 
-        FirebaseRecyclerOptions<model> options =
-                new FirebaseRecyclerOptions.Builder<model>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid()).child("posts"), model.class)
-                        .build();
-        myAdapter = new MyAdapter(options);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        myAdapter = new MyAdapter(getContext(),articleList);
         recyclerView.setAdapter(myAdapter);
 
 
@@ -80,19 +97,5 @@ public class YourArticleFragment extends Fragment {
 
 
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        myAdapter.startListening();
-    }
-
-    @Override
-    public void onStop() {
-
-        super.onStop();
-        myAdapter.stopListening();
-
-
-    }
 }
+

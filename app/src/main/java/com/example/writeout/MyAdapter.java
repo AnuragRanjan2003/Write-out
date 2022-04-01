@@ -1,5 +1,6 @@
 package com.example.writeout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,53 +12,70 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.airbnb.lottie.animation.content.Content;
+import com.example.writeout.R;
+import com.example.writeout.YourArticleDisplayActivity;
+import com.example.writeout.model;
 
-public class MyAdapter extends FirebaseRecyclerAdapter<model,MyAdapter.myviewholder> {
+import java.util.ArrayList;
 
-    public MyAdapter(@NonNull FirebaseRecyclerOptions<model> options) {
-        super(options);
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    Context context;
+    ArrayList<model> list;
+
+    public MyAdapter(Context context, ArrayList<model> list) {
+        this.context = context;
+        this.list = list;
     }
 
-    @Override
-    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull model model) {
-                holder.displaytitle.setText(model.getTitle());
-                holder.displaycategory.setText(model.getCategory());
-                holder.displaydate.setText(model.getDate());
-                holder.cardView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        AppCompatActivity activity=(AppCompatActivity)view.getContext();
-                        Intent intent=new Intent(activity,YourArticleDisplayActivity.class);
-                        intent.putExtra("title",model.getTitle());
-                        intent.putExtra("category",model.getCategory());
-                        intent.putExtra("date",model.getDate());
-                        intent.putExtra("author",model.getAuthorName());
-                        activity.startActivity(intent);
 
-                    }
-                });
-
-    }
 
     @NonNull
     @Override
-    public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.rowdesignforself,parent,false);
-        return new myviewholder(view);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowdesignforself, parent, false);
+        return new MyViewHolder(v);
     }
 
-    public class myviewholder extends RecyclerView.ViewHolder{
-        TextView displaytitle,displaycategory,displaydate;
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        model model = list.get(position);
+        holder.Title.setText(model.getTitle());
+        holder.Category.setText(model.getCategory());
+        holder.Date.setText(model.getDate());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                Intent intent = new Intent(activity, YourArticleDisplayActivity.class);
+                intent.putExtra("title", model.getTitle());
+                intent.putExtra("category", model.getCategory());
+                intent.putExtra("date", model.getDate());
+                intent.putExtra("author", model.getAuthorName());
+                activity.startActivity(intent);
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView Title, Category, Date;
         CardView cardView;
 
-        public myviewholder(@NonNull View itemView) {
-            super(itemView);
-            displaytitle=itemView.findViewById(R.id.display_title);
-            displaycategory=itemView.findViewById(R.id.display_category);
-            displaydate=itemView.findViewById(R.id.display_date);
-            cardView=itemView.findViewById(R.id.cardview1);
+        public MyViewHolder(@NonNull View itemview) {
+            super(itemview);
+            Title = itemview.findViewById(R.id.display_title);
+            Category = itemview.findViewById(R.id.display_category);
+            Date = itemview.findViewById(R.id.display_date);
+            cardView = itemview.findViewById(R.id.cardview1);
         }
+
     }
 }
