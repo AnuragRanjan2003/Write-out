@@ -71,10 +71,10 @@ public class MyAdapter3 extends FirebaseRecyclerAdapter<model, MyAdapter3.myview
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
-            displaytitle = itemView.findViewById(R.id.display_title);
-            displayauthor = itemView.findViewById(R.id.display_author);
-            displaycategory = itemView.findViewById(R.id.display_category);
-            displaydate = itemView.findViewById(R.id.display_date);
+            displaytitle = itemView.findViewById(R.id.display_title2);
+            displayauthor = itemView.findViewById(R.id.display_author2);
+            displaycategory = itemView.findViewById(R.id.display_category2);
+            displaydate = itemView.findViewById(R.id.display_date2);
             cardView=itemView.findViewById(R.id.cardview2);
         }
     }

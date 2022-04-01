@@ -67,7 +67,6 @@ public class YourArticleFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_your_article, container, false);
         recyclerView = view.findViewById(R.id.rec_your_articles);

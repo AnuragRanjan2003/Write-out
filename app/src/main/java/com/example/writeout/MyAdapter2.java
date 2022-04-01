@@ -1,5 +1,6 @@
 package com.example.writeout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,53 +12,44 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.writeout.R;
+import com.example.writeout.model;
 
-public class MyAdapter2 extends FirebaseRecyclerAdapter<model, MyAdapter2.myviewholder> {
+import java.util.ArrayList;
+import java.util.Date;
 
+public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
+    Context context;
+    ArrayList<model> list;
 
-    public MyAdapter2(@NonNull FirebaseRecyclerOptions<model> options) {
-        super(options);
+    public MyAdapter2(Context context, ArrayList<model> list) {
+        this.context = context;
+        this.list = list;
     }
 
-    String currentUserName;
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.rowdesign,parent,false);
+        return new MyViewHolder(view);
+    }
 
     @Override
-    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull model model) {
-        FirebaseDatabase database;
-        FirebaseAuth mAuth;
-        FirebaseUser firebaseUser;
-        database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        firebaseUser = mAuth.getCurrentUser();
-        database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    currentUserName = String.valueOf(task.getResult().getValue());
-                }
-            }
-        });
-        holder.displaytitle.setText(model.getTitle());
-        holder.displayauthor.setText(model.getAuthorName());
-        holder.displaycategory.setText(model.getCategory());
-        holder.displaydate.setText(model.getDate());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        model model = list.get(position);
+        holder.Title.setText(model.getTitle());
+        holder.Category.setText(model.getCategory());
+        holder.Date.setText(model.getDate());
+        holder.Author.setText(model.getAuthorName());
+        holder.CardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity=(AppCompatActivity)view.getContext();
-                Intent intent=new Intent(activity,ArticleDisplayActivity.class);
-                intent.putExtra("Title2",model.getTitle());
-                intent.putExtra("Category2",model.getCategory());
-                intent.putExtra("Author2",model.getAuthorName());
-                intent.putExtra("Date2",model.getDate());
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                Intent intent = new Intent(activity, ArticleDisplayActivity.class);
+                intent.putExtra("Title2", model.getTitle());
+                intent.putExtra("Category2", model.getCategory());
+                intent.putExtra("Date2", model.getDate());
+                intent.putExtra("Author2", model.getAuthorName());
                 activity.startActivity(intent);
 
             }
@@ -66,25 +58,22 @@ public class MyAdapter2 extends FirebaseRecyclerAdapter<model, MyAdapter2.myview
 
     }
 
-    @NonNull
     @Override
-    public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowdesign, parent, false);
-        return new myviewholder(view);
+    public int getItemCount() {
+        return list.size();
     }
 
-    public class myviewholder extends RecyclerView.ViewHolder {
-        TextView displaytitle, displayauthor, displaycategory, displaydate;
-        CardView cardView;
 
-        public myviewholder(@NonNull View itemView) {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView Title,Category,Date,Author;
+        CardView CardView;
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            displaytitle = itemView.findViewById(R.id.display_title);
-            displayauthor = itemView.findViewById(R.id.display_author);
-            displaycategory = itemView.findViewById(R.id.display_category);
-            displaydate = itemView.findViewById(R.id.display_date);
-            cardView=itemView.findViewById(R.id.cardview2);
+            Title=itemView.findViewById(R.id.display_title2);
+            Category=itemView.findViewById(R.id.display_category2);
+            Date=itemView.findViewById(R.id.display_date2);
+            Author=itemView.findViewById(R.id.display_author2);
+            CardView=itemView.findViewById(R.id.cardview2);
         }
     }
 }
-
