@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 progressDialog.dismiss();
-                                database.getReference("users").child(task.getResult().getUser().getUid()).child("name").setValue(Username.getText().toString());
+                                database.getReference("users").child(task.getResult().getUser().getUid()).child("name").setValue(Username.getText().toString().trim());
                                 database.getReference("users").child(task.getResult().getUser().getUid()).child("id").setValue(task.getResult().getUser().getUid());
 
                                 startActivity(new Intent(SignUpActivity.this, SignInActivity.class));

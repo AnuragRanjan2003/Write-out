@@ -77,13 +77,8 @@ public class OtherArticlesFragment extends Fragment {
         database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    AuthName=String.valueOf(task.getResult().getValue());
-                    Toast.makeText(getContext(),AuthName, Toast.LENGTH_SHORT).show();
+                userName=String.valueOf(task.getResult().getValue());
 
-                }
-                else
-                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -96,7 +91,7 @@ public class OtherArticlesFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     model Model = snapshot1.getValue(model.class);
-                    if (!(Model.getAuthorName().equals("papaya"))){
+                    if (!(Model.getAuthorName().equals(userName))){
                         arrayList.add(Model);
                     }
 
