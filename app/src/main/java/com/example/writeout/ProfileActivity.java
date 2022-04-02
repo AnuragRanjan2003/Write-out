@@ -25,7 +25,7 @@ import java.util.HashMap;
 public class ProfileActivity extends AppCompatActivity {
     EditText UserName;
     TextView ProfileUid,UserEmail;
-    ExtendedFloatingActionButton fab;
+    ExtendedFloatingActionButton fab,delete;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
@@ -41,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         UserEmail=findViewById(R.id.etProfileEmail);
         ProfileUid=findViewById(R.id.tvProfileUid);
         fab=findViewById(R.id.fabApplyChanges);
+        delete=findViewById(R.id.fab_deleteAcc);
         database=FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
         progressDialog=new ProgressDialog(ProfileActivity.this);
@@ -100,6 +101,12 @@ public class ProfileActivity extends AppCompatActivity {
                 });
                 }
 
+
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });

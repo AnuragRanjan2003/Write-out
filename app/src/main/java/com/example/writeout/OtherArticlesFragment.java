@@ -70,7 +70,10 @@ public class OtherArticlesFragment extends Fragment {
 
 
         // Inflate the layout for this fragment
-
+        View view = inflater.inflate(R.layout.fragment_other_articles, container, false);
+        recyclerView = view.findViewById(R.id.rec_other_articles);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        arrayList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
@@ -78,32 +81,31 @@ public class OtherArticlesFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 userName=String.valueOf(task.getResult().getValue());
+                database.getReference("post").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                            model Model = snapshot1.getValue(model.class);
+                            if (!(Model.getAuthorName().equals(userName))){
+                                arrayList.add(Model);
+                            }
 
-            }
-        });
-
-        View view = inflater.inflate(R.layout.fragment_other_articles, container, false);
-        recyclerView = view.findViewById(R.id.rec_other_articles);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        arrayList = new ArrayList<>();
-        database.getReference("post").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    model Model = snapshot1.getValue(model.class);
-                    if (!(Model.getAuthorName().equals(userName))){
-                        arrayList.add(Model);
+                        }
+                        myAdapter2.notifyDataSetChanged();
                     }
 
-                }
-                myAdapter2.notifyDataSetChanged();
-            }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+
 
             }
         });
+
+
+
         myAdapter2 = new MyAdapter2(getContext(), arrayList);
         recyclerView.setAdapter(myAdapter2);
         return view;
