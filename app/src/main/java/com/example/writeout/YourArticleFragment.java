@@ -37,6 +37,7 @@ public class YourArticleFragment extends Fragment {
     MyAdapter myAdapter;
     ArrayList<model> articleList;
 
+
     public YourArticleFragment() {
         // Required empty public constructor
     }
@@ -90,11 +91,7 @@ public class YourArticleFragment extends Fragment {
         });
         myAdapter = new MyAdapter(getContext(),articleList);
         recyclerView.setAdapter(myAdapter);
-
-
         return view;
-
-
     }
 }
 

@@ -36,7 +36,7 @@ public class OtherArticlesFragment extends Fragment {
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     String AuthName;
-    
+
     FirebaseUser firebaseUser;
     private String mParam1;
     private String mParam2;
@@ -80,13 +80,13 @@ public class OtherArticlesFragment extends Fragment {
         database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                userName=String.valueOf(task.getResult().getValue());
+                userName = String.valueOf(task.getResult().getValue());
                 database.getReference("post").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                             model Model = snapshot1.getValue(model.class);
-                            if (!(Model.getAuthorName().equals(userName))){
+                            if (!(Model.getAuthorName().equals(userName))) {
                                 arrayList.add(Model);
                             }
 
@@ -103,7 +103,6 @@ public class OtherArticlesFragment extends Fragment {
 
             }
         });
-
 
 
         myAdapter2 = new MyAdapter2(getContext(), arrayList);

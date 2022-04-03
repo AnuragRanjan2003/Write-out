@@ -126,8 +126,13 @@ public class WritingActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     return;
                     }
+                    if(postArticle.getText().toString().length()<20){
+                        postArticle.setError("Article must be at least 20 chars");
+                        progressDialog.dismiss();
+                        return;
+                    }
                     else{
-                    post1=new post(postArticle.getText().toString(),Category,postTitle.getText().toString(),date);
+                        post1=new post(postArticle.getText().toString(),Category,postTitle.getText().toString(),date);
                     database.getReference("users").child(firebaseUser.getUid()).child("posts").child(postTitle.getText().toString()).setValue(post1);
                     post2=new post(postArticle.getText().toString(), firebaseUser.getUid(),Category,postTitle.getText().toString(),AuthorName,date);
                     database.getReference("post").child(postTitle.getText().toString()).setValue(post2).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -2,9 +2,11 @@ package com.example.writeout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +56,14 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
 
             }
         });
+        if(position%4==0)
+            holder.CardView.setCardBackgroundColor(Color.RED);
+        else if(position%4==1)
+            holder.CardView.setCardBackgroundColor(Color.BLUE);
+        else if(position%4==2)
+            holder.CardView.setCardBackgroundColor(Color.CYAN);
+        else holder.CardView.setCardBackgroundColor(Color.GREEN);
+
 
 
     }

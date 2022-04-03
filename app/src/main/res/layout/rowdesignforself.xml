@@ -9,7 +9,6 @@
     android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
     android:layout_marginBottom="5dp"
-    android:backgroundTint="@color/baseOrange"
     android:elevation="10dp"
     app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true"
@@ -85,6 +84,14 @@
                 android:textColor="@color/white" />
 
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sub_article2"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:paddingLeft="20dp"
+            android:layout_marginBottom="10dp"/>
 
 
     </LinearLayout>
