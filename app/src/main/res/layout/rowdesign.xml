@@ -46,7 +46,7 @@
                 android:layout_marginRight="25dp"
                 android:text="Author"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_marginRight="50dp"
                 android:text="authorName"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,7 +72,7 @@
                 android:layout_marginLeft="25dp"
                 android:text="Category"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -83,13 +83,13 @@
                 android:layout_marginRight="50dp"
                 android:text="category"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -107,6 +107,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
                 android:text="date"
+                android:textSize="14sp"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -116,6 +117,7 @@
             android:id="@+id/sub_article"
             android:textColor="@color/white"
             android:textSize="14sp"
+            android:padding="25dp"
             android:layout_marginTop="5dp"/>
 
 

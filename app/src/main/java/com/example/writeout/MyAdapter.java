@@ -71,18 +71,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         firebaseDatabase.getReference("post").child(model.getTitle()).child("article").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                subArticle=String.valueOf(task.getResult().getValue()).substring(0,20);
-                holder.SubArticle.setText(subArticle);
-
+                if(String.valueOf(task.getResult().getValue()).length()>=100)
+                holder.SubArticle.setText(String.valueOf(task.getResult().getValue()).substring(0,100));
+                else
+                    holder.SubArticle.setText(String.valueOf(task.getResult().getValue()));
             }
         });
+
+
         if(position%3==0)
             holder.cardView.setCardBackgroundColor(Color.rgb(247, 101, 89));
         else if(position%3==1)
             holder.cardView.setCardBackgroundColor(Color.rgb(100, 163, 250));
         else
             holder.cardView.setCardBackgroundColor(Color.rgb(146, 214, 146));
-
 
 
     }

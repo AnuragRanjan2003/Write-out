@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.writeout.R;
 import com.example.writeout.model;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +46,15 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> {
         holder.Category.setText(model.getCategory());
         holder.Date.setText(model.getDate());
         holder.Author.setText(model.getAuthorName());
+        FirebaseDatabase.getInstance().getReference("post").child(model.getTitle()).child("article").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(String.valueOf(task.getResult().getValue()).length()>=100)
+                    holder.subArticle.setText(String.valueOf(task.getResult().getValue()).substring(0,100));
+                else
+                    holder.subArticle.setText(String.valueOf(task.getResult().getValue()));
+            }
+        });
         holder.CardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,13 +68,12 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> {
 
             }
         });
-        if(position%4==0)
-            holder.CardView.setCardBackgroundColor(Color.RED);
-        else if(position%4==1)
-            holder.CardView.setCardBackgroundColor(Color.BLUE);
-        else if(position%4==2)
-            holder.CardView.setCardBackgroundColor(Color.CYAN);
-        else holder.CardView.setCardBackgroundColor(Color.GREEN);
+        if(position%3==0)
+            holder.CardView.setCardBackgroundColor(Color.rgb(247, 101, 89));
+        else if(position%3==1)
+            holder.CardView.setCardBackgroundColor(Color.rgb(100, 163, 250));
+        else
+            holder.CardView.setCardBackgroundColor(Color.rgb(146, 214, 146));
 
 
     }
@@ -73,7 +85,7 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> {
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Title,Category,Date,Author;
+        TextView Title,Category,Date,Author,subArticle;
         CardView CardView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +94,7 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> {
             Date=itemView.findViewById(R.id.display_date2);
             Author=itemView.findViewById(R.id.display_author2);
             CardView=itemView.findViewById(R.id.cardview2);
+            subArticle=itemView.findViewById(R.id.sub_article);
         }
     }
 }

@@ -46,7 +46,7 @@
                 android:layout_marginLeft="25dp"
                 android:text="Category"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -57,13 +57,13 @@
                 android:layout_marginRight="50dp"
                 android:text="category"
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -72,7 +72,7 @@
                 android:layout_marginLeft="25dp"
                 android:text="Date of publication"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -81,6 +81,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
                 android:text="date"
+                android:textSize="16sp"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -90,7 +91,7 @@
             android:id="@+id/sub_article2"
             android:textSize="14sp"
             android:textColor="@color/white"
-            android:paddingLeft="20dp"
+            android:padding="25dp"
             android:layout_marginBottom="10dp"/>
 
 

@@ -1,8 +1,10 @@
 package com.example.writeout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,17 +26,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 public class YourArticleDisplayActivity extends AppCompatActivity {
-    String Title, Category,Date,Author;
+    String Title, Category, Date, Author;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
-    TextView title, category,date;
+    TextView title, category, date;
     EditText article;
     ExtendedFloatingActionButton parentFab, editFab, deleteFab, favFab;
     Boolean parentFabIsOpen = false;
     String prevArticle;
     post post;
-    Animation FabOpen,FabClose,FabClock,FabAntiClock;
+    Animation FabOpen, FabClose, FabClock, FabAntiClock;
 
 
     @Override
@@ -44,7 +46,7 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
         title = findViewById(R.id.tv_title);
         category = findViewById(R.id.tv_category);
         article = findViewById(R.id.etarticle);
-        date=findViewById(R.id.tv_date1);
+        date = findViewById(R.id.tv_date1);
         parentFab = findViewById(R.id.parentfab);
         editFab = findViewById(R.id.editfab);
         favFab = findViewById(R.id.favfab);
@@ -59,16 +61,16 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
         Title = intent2.getStringExtra("title");
         Intent intent3 = getIntent();
         Category = intent3.getStringExtra("category");
-        Intent intent4=getIntent();
-        Date=intent4.getStringExtra("date");
-        FabOpen= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_open);
-        FabClose= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
-        FabClock= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_clock);
-        FabAntiClock= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_anticlock);
+        Intent intent4 = getIntent();
+        Date = intent4.getStringExtra("date");
+        FabOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        FabClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        FabClock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clock);
+        FabAntiClock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anticlock);
         database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Author=String.valueOf(task.getResult().getValue());
+                Author = String.valueOf(task.getResult().getValue());
             }
         });
 
@@ -133,19 +135,39 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
         deleteFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                database.getReference("post").child(Title).removeValue();
-                database.getReference("users").child(firebaseUser.getUid()).child("posts").child(Title).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(YourArticleDisplayActivity.this, "Article Deleted Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(YourArticleDisplayActivity.this,MainActivity.class));
-                        }     
-                    }
-                });
+                new AlertDialog.Builder(YourArticleDisplayActivity.this)
+                        .setTitle("Delete the Article")
+                        .setMessage("Are you sure you want to delete this article")
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                database.getReference("post").child(Title).removeValue();
+                                database.getReference("users").child(firebaseUser.getUid()).child("posts").child(Title).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(YourArticleDisplayActivity.this, "Article Deleted Successfully", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(YourArticleDisplayActivity.this, MainActivity.class));
+                                        }
+                                    }
+                                });
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+
+                            }
+                        })
+                        .create()
+                        .show();
+
+
             }
         });
-        post=new post(prevArticle,firebaseUser.getUid(),Category,Title,Author,Date);
+        post = new post(prevArticle, firebaseUser.getUid(), Category, Title, Author, Date);
         favFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,10 +176,10 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Toast.makeText(YourArticleDisplayActivity.this, "Added to Favourite", Toast.LENGTH_SHORT).show();
                                 }
-                                
+
                             }
                         });
             }
@@ -165,8 +187,9 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
 
 
     }
-    public void onBackPressed(){
-        startActivity(new Intent(YourArticleDisplayActivity.this,MainActivity.class));
+
+    public void onBackPressed() {
+        startActivity(new Intent(YourArticleDisplayActivity.this, MainActivity.class));
         finishAffinity();
 
     }

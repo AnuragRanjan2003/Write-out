@@ -126,8 +126,8 @@ public class WritingActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     return;
                     }
-                    if(postArticle.getText().toString().length()<20){
-                        postArticle.setError("Article must be at least 20 chars");
+                    if(postArticle.getText().toString().length()<100){
+                        postArticle.setError("Article must be at least 100 chars");
                         progressDialog.dismiss();
                         return;
                     }
