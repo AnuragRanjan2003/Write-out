@@ -3,6 +3,7 @@ package com.example.writeout;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,7 @@ public class YourArticleFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     RecyclerView recyclerView;
+    SearchView searchView;
     MyAdapter myAdapter;
     ArrayList<model> articleList;
 
@@ -70,6 +72,7 @@ public class YourArticleFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
 
         View view = inflater.inflate(R.layout.fragment_your_article, container, false);
+        searchView=view.findViewById(R.id.Search_Icon);
         recyclerView = view.findViewById(R.id.rec_your_articles);
         recyclerView.setLayoutManager(new LinearLayoutManagerWrapper(getContext(), LinearLayoutManager.VERTICAL, false));
         articleList = new ArrayList<>();
@@ -91,6 +94,20 @@ public class YourArticleFragment extends Fragment {
         });
         myAdapter = new MyAdapter(getContext(),articleList);
         recyclerView.setAdapter(myAdapter);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                myAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                myAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
         return view;
     }
 }

@@ -3,11 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".YourArticleFragment"
     android:background="@color/white">
+   <androidx.appcompat.widget.SearchView
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:id="@+id/Search_Icon"
+       app:iconifiedByDefault="false"
+       app:queryHint="Search here"
+       android:background="@color/baseOrange">
+   </androidx.appcompat.widget.SearchView>
+
+
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:id="@+id/rec_your_articles"/>
+       android:id="@+id/rec_your_articles"
+       android:layout_marginTop="50dp"/>
 </FrameLayout>

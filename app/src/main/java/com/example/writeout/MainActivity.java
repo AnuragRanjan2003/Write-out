@@ -3,6 +3,7 @@ package com.example.writeout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbarcolor)));
         database=FirebaseDatabase.getInstance();
         mAuth=FirebaseAuth.getInstance();
-       // toolbar=findViewById(R.id.toolbar);
+
         firebaseUser=mAuth.getCurrentUser();
         fab=findViewById(R.id.floatingActionButton);
         fab.shrink();
@@ -85,10 +86,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.menu1,menu);
-        if(menu instanceof MenuBuilder){
-            MenuBuilder menuBuilder=(MenuBuilder) menu;
-            menuBuilder.setOptionalIconsVisible(true);
-        }
         return true;
     }
 
