@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -97,16 +98,42 @@ public class YourArticleFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                myAdapter.getFilter().filter(query);
+                if(!query.isEmpty()){
+                    myAdapter.getFilter().filter(query);}
+
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
+                if(!newText.isEmpty())
                 myAdapter.getFilter().filter(newText);
-                return false;
+                else{
+                    articleList = new ArrayList<>();
+                    database.getReference("users").child(firebaseUser.getUid()).child("posts").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                model Model = snapshot1.getValue(model.class);
+                                articleList.add(Model);
+                            }
+                            myAdapter.notifyDataSetChanged();
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    myAdapter = new MyAdapter(getContext(),articleList);
+                    recyclerView.setAdapter(myAdapter);
+                }
+
+                return true;
             }
         });
+
+
 
         return view;
     }

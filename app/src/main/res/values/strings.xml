@@ -15,4 +15,5 @@
     <string name="profile">Profile</string>
     <string name="compose_article">Compose Article</string>
     <string name="submit">submit</string>
+    <string name="search_hint">hint</string>
 </resources>
