@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,11 +36,35 @@ public class FavouritesFragment extends Fragment {
     RecyclerView recyclerView;
     MyAdapter3 myAdapter3;
     ArrayList<model> arrayList;
-    FirebaseAuth mAuth;
-    FirebaseUser firebaseUser;
+    SearchView searchView;
+
 
     public FavouritesFragment() {
 
+    }
+    public void LoadArticles(){
+        FirebaseAuth mAuth;
+        FirebaseUser firebaseUser;
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();firebaseUser = mAuth.getCurrentUser();
+        arrayList=new ArrayList<>();
+        database.getReference("users").child(firebaseUser.getUid()).child("fav").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snapshot1: snapshot.getChildren()){
+                    model Model= snapshot1.getValue(model.class);
+                    arrayList.add(Model);
+                }
+                myAdapter3.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        myAdapter3 = new MyAdapter3(getContext(),arrayList);
+        recyclerView.setAdapter(myAdapter3);
     }
 
     @Override
@@ -64,31 +89,27 @@ public class FavouritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-         mAuth = FirebaseAuth.getInstance();firebaseUser = mAuth.getCurrentUser();
+
         View view= inflater.inflate(R.layout.fragment_favourites, container, false);
+        searchView=view.findViewById(R.id.Search_Icon3);
         recyclerView=view.findViewById(R.id.rec_fav_articles);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        arrayList=new ArrayList<>();
-        database.getReference("users").child(firebaseUser.getUid()).child("fav").addValueEventListener(new ValueEventListener() {
+        LoadArticles();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1: snapshot.getChildren()){
-                    model Model= snapshot1.getValue(model.class);
-                    arrayList.add(Model);
-                }
-                myAdapter3.notifyDataSetChanged();
+            public boolean onQueryTextSubmit(String s) {
+                return false;
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public boolean onQueryTextChange(String s) {
+                if(!s.isEmpty())
+                myAdapter3.getFilter().filter(s);
+                else
+                    LoadArticles();
+                return false;
             }
         });
-        myAdapter3 = new MyAdapter3(getContext(),arrayList);
-        recyclerView.setAdapter(myAdapter3);
-
-
         return view;
     }
 

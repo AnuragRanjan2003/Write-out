@@ -5,9 +5,23 @@
     android:layout_height="match_parent"
     tools:context=".OtherArticlesFragment"
     android:background="@color/white">
+    <SearchView
+        android:searchIcon="@drawable/ic_baseline_search_24"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/Search_Icon3"
+        android:iconifiedByDefault="false"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="7dp"
+        android:queryHint="Search Here"
+        android:textAlignment="center"
+        android:background="@drawable/searchview_design"
+        android:elevation="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_fav_articles"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="65dp"/>
 </FrameLayout>

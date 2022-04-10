@@ -6,7 +6,10 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,15 +24,18 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
-public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> {
+public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> implements Filterable {
     Context context;
     ArrayList<model> list;
+    ArrayList<model> completeList;
 
     public MyAdapter3(Context context, ArrayList<model> list) {
         this.context = context;
         this.list = list;
+        completeList=new ArrayList<>(list);
     }
 
     @NonNull
@@ -82,6 +88,38 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> {
     public int getItemCount() {
         return list.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+    Filter filter =new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<model> filteredList=new ArrayList<>();
+            String inputString=charSequence.toString().toLowerCase().trim();
+            if(!inputString.isEmpty()) {
+                for(model Model: list){
+                    if(Model.getCategory().toLowerCase().trim().startsWith(inputString)){
+                        filteredList.add(Model); }
+                }
+
+                if(filteredList.isEmpty())
+                    Toast.makeText(context, "No Results found", Toast.LENGTH_SHORT).show();}
+            else if (inputString.isEmpty())
+                filteredList.addAll(completeList);
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            list.clear();
+            list.addAll((Collection<? extends model>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

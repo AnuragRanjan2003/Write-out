@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -35,7 +36,8 @@ public class OtherArticlesFragment extends Fragment {
     ArrayList<model> arrayList;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
-    String AuthName;
+    SearchView searchView;
+
 
     FirebaseUser firebaseUser;
     private String mParam1;
@@ -64,15 +66,7 @@ public class OtherArticlesFragment extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_other_articles, container, false);
-        recyclerView = view.findViewById(R.id.rec_other_articles);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    public void LoadArticles() {
         arrayList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -103,10 +97,40 @@ public class OtherArticlesFragment extends Fragment {
 
             }
         });
-
-
         myAdapter2 = new MyAdapter2(getContext(), arrayList);
         recyclerView.setAdapter(myAdapter2);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_other_articles, container, false);
+        recyclerView = view.findViewById(R.id.rec_other_articles);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LoadArticles();
+        searchView = view.findViewById(R.id.Search_Icon2);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if (!s.isEmpty())
+                    myAdapter2.getFilter().filter(s);
+                else {
+                    //reload all articles
+                    LoadArticles();
+                }
+                return true;
+            }
+
+        });
+
         return view;
 
     }

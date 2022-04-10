@@ -43,6 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     public MyAdapter(Context context, ArrayList<model> list) {
         this.context = context;
         this.list = list;
+        completeList=new ArrayList<>(list);
 
     }
     @NonNull
@@ -108,19 +109,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            completeList=new ArrayList<>(list);
+
             String inputString=charSequence.toString().toLowerCase().trim();
             ArrayList<model> filteredList = new ArrayList<>();
-
-             if(!inputString.isEmpty()) {
-                for(model Model: completeList){
-                    if(Model.getTitle().toLowerCase().trim().contains(inputString)){
+            if(!inputString.isEmpty()) {
+                for(model Model: list){
+                    if(Model.getCategory().toLowerCase().trim().startsWith(inputString)){
                         filteredList.add(Model); }
                 }
 
              if(filteredList.isEmpty())
                  Toast.makeText(context, "No Results found", Toast.LENGTH_SHORT).show();}
-                else if (filteredList.isEmpty())
+                else if (inputString.isEmpty())
                     filteredList.addAll(completeList);
             FilterResults filterResults = new FilterResults();
             filterResults.values = filteredList;

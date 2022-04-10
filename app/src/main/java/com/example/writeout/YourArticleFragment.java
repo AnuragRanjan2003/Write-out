@@ -1,5 +1,6 @@
 package com.example.writeout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +29,32 @@ public class YourArticleFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
     FirebaseDatabase database;
+
+    public void LoadArticles() {
+        mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+        articleList = new ArrayList<>();
+        database.getReference("users").child(firebaseUser.getUid()).child("posts").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    model Model = snapshot1.getValue(model.class);
+                    articleList.add(Model);
+                }
+                myAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        myAdapter = new MyAdapter(getContext(), articleList);
+        recyclerView.setAdapter(myAdapter);
+
+    }
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -65,76 +93,35 @@ public class YourArticleFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mAuth = FirebaseAuth.getInstance();
-        firebaseUser = mAuth.getCurrentUser();
-        database = FirebaseDatabase.getInstance();
+
 
         View view = inflater.inflate(R.layout.fragment_your_article, container, false);
-        searchView=view.findViewById(R.id.Search_Icon);
+        searchView = view.findViewById(R.id.Search_Icon);
         recyclerView = view.findViewById(R.id.rec_your_articles);
         recyclerView.setLayoutManager(new LinearLayoutManagerWrapper(getContext(), LinearLayoutManager.VERTICAL, false));
-        articleList = new ArrayList<>();
-        database.getReference("users").child(firebaseUser.getUid()).child("posts").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                    model Model = snapshot1.getValue(model.class);
-                    articleList.add(Model);
-                }
-                myAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        myAdapter = new MyAdapter(getContext(),articleList);
-        recyclerView.setAdapter(myAdapter);
+        LoadArticles();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(!query.isEmpty()){
-                    myAdapter.getFilter().filter(query);}
-
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(!newText.isEmpty())
-                myAdapter.getFilter().filter(newText);
-                else{
-                    articleList = new ArrayList<>();
-                    database.getReference("users").child(firebaseUser.getUid()).child("posts").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                                model Model = snapshot1.getValue(model.class);
-                                articleList.add(Model);
-                            }
-                            myAdapter.notifyDataSetChanged();
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                    myAdapter = new MyAdapter(getContext(),articleList);
-                    recyclerView.setAdapter(myAdapter);
+                if (!newText.isEmpty())
+                    myAdapter.getFilter().filter(newText);
+                else {
+                    //reload all the articles
+                    LoadArticles();
                 }
 
                 return true;
             }
         });
-
-
-
         return view;
     }
 }
