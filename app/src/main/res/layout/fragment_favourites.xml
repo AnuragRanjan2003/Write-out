@@ -14,7 +14,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="7dp"
-        android:queryHint="Search Here"
+        android:queryHint="Search category here"
         android:textAlignment="center"
         android:background="@drawable/searchview_design"
         android:elevation="20dp"/>

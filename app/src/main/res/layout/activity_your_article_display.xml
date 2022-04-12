@@ -132,14 +132,13 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="end"
         android:layout_marginTop="5dp"
-        android:visibility="invisible"
-
         android:layout_marginRight="30dp"
         android:layout_marginBottom="260dp"
         android:backgroundTint="#8E24AA"
         android:elevation="10dp"
-        android:text="Edit Article"
+        android:text="Apply Changes"
         android:textColor="@color/white"
+        android:visibility="invisible"
         app:icon="@drawable/composeicon"
         app:iconTint="@color/white" />
 

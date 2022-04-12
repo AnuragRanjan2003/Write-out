@@ -53,6 +53,7 @@ public class WritingActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ public class WritingActivity extends AppCompatActivity {
         CategoryList.add("Informative");
         CategoryList.add("Casual");
         CategoryList.add("Political");
-        arrayAdapter=new ArrayAdapter<>(getApplicationContext(), com.airbnb.lottie.R.layout.support_simple_spinner_dropdown_item,CategoryList);
+        arrayAdapter=new ArrayAdapter<>(getApplicationContext(),R.layout.dropdown_item,CategoryList);
         act.setAdapter(arrayAdapter);
 
         postArticle=findViewById(R.id.PostArticle);

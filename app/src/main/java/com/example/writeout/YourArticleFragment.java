@@ -23,8 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
-
 public class YourArticleFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
@@ -43,17 +41,13 @@ public class YourArticleFragment extends Fragment {
                     articleList.add(Model);
                 }
                 myAdapter.notifyDataSetChanged();
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
         myAdapter = new MyAdapter(getContext(), articleList);
         recyclerView.setAdapter(myAdapter);
-
     }
 
 

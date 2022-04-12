@@ -19,7 +19,7 @@
         android:outlineAmbientShadowColor="@color/black"
         android:textAlignment="center"
         app:iconifiedByDefault="false"
-        app:queryHint="Search here"
+        app:queryHint="Search category here"
         app:searchIcon="@drawable/ic_baseline_search_24" />
 
     <androidx.recyclerview.widget.RecyclerView
