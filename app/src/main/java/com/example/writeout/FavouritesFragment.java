@@ -54,6 +54,7 @@ public class FavouritesFragment extends Fragment {
                 for (DataSnapshot snapshot1: snapshot.getChildren()){
                     model Model= snapshot1.getValue(model.class);
                     arrayList.add(Model);
+                    myAdapter3.completeList.add(Model);
                 }
                 myAdapter3.notifyDataSetChanged();
             }

@@ -43,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     public MyAdapter(Context context, ArrayList<model> list) {
         this.context = context;
         this.list = list;
-        completeList = new ArrayList<>(list);
+        completeList = new ArrayList<>();
 
     }
 
@@ -113,8 +113,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             String inputString = charSequence.toString().toLowerCase().trim();
             ArrayList<model> filteredList = new ArrayList<>();
             if (!inputString.isEmpty()) {
-                for (model Model : list) {
-                    if (Model.getCategory().toLowerCase().trim().startsWith(inputString)) {
+                for (model Model : completeList) {
+                    if (Model.getCategory().toLowerCase().trim().contains(inputString)) {
                         filteredList.add(Model);
                     }
                 }

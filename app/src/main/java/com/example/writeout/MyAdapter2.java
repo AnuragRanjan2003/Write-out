@@ -39,7 +39,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
     public MyAdapter2(Context context, ArrayList<model> list) {
         this.context = context;
         this.list = list;
-        completeList=new ArrayList<>(list);
+        completeList=new ArrayList<>();
     }
 
 
@@ -103,13 +103,12 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
     Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            completeList=new ArrayList<>(list);
             String inputString=charSequence.toString().toLowerCase().trim();
             ArrayList<model> filteredList = new ArrayList<>();
 
             if(!inputString.isEmpty()) {
                 for(model Model: completeList){
-                    if(Model.getCategory().toLowerCase().trim().startsWith(inputString)){
+                    if(Model.getCategory().toLowerCase().trim().contains(inputString)){
                         filteredList.add(Model); }
                 }
 

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +40,7 @@ public class YourArticleFragment extends Fragment {
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     model Model = snapshot1.getValue(model.class);
                     articleList.add(Model);
+                    myAdapter.completeList.add(Model);
                 }
                 myAdapter.notifyDataSetChanged();
             }
@@ -106,8 +108,8 @@ public class YourArticleFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (!newText.isEmpty())
-                    myAdapter.getFilter().filter(newText);
+                if (!newText.isEmpty()){
+                    myAdapter.getFilter().filter(newText);}
                 else {
                     //reload all the articles
                     LoadArticles();
@@ -116,6 +118,8 @@ public class YourArticleFragment extends Fragment {
                 return true;
             }
         });
+
+
         return view;
     }
 }

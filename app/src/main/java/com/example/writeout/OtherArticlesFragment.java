@@ -82,6 +82,7 @@ public class OtherArticlesFragment extends Fragment {
                             model Model = snapshot1.getValue(model.class);
                             if (!(Model.getAuthorName().equals(userName))) {
                                 arrayList.add(Model);
+                                myAdapter2.completeList.add(Model);
                             }
 
                         }
