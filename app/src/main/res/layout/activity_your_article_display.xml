@@ -73,6 +73,7 @@
                         android:textSize="18sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -85,9 +86,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="0dp"
                         android:text="Publication Date:"
-                        android:textSize="20sp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"/>
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_date1"
@@ -117,6 +118,23 @@
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Comments"
+                android:textStyle="bold|italic"
+                android:textSize="22sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rec_Comment1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                android:paddingLeft="10dp" />
 
 
         </LinearLayout>
@@ -146,35 +164,35 @@
         android:id="@+id/favfab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="190dp"
+        android:backgroundTint="#1E88E5"
+        android:elevation="10dp"
         android:text="Favourite"
         android:textColor="@color/white"
         android:visibility="invisible"
-        android:layout_gravity="end"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="190dp"
-        android:layout_marginTop="0dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         app:icon="@drawable/ic_baseline_star_24"
-        app:iconTint="@color/white"
-        android:elevation="10dp"
-        android:backgroundTint="#1E88E5"/>
+        app:iconTint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/deletefab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="end"
         android:layout_marginTop="0dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="120dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:backgroundTint="#E53935"
         android:elevation="10dp"
-        android:visibility="invisible"
         android:text="Delete"
         android:textColor="@color/white"
+        android:visibility="invisible"
         app:icon="@drawable/ic_baseline_delete_24"
         app:iconTint="@color/white" />
 

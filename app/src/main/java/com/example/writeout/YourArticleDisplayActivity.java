@@ -3,6 +3,8 @@ package com.example.writeout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,7 +12,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +25,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class YourArticleDisplayActivity extends AppCompatActivity {
     String Title, Category, Date, Author;
@@ -36,7 +44,10 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
     Boolean parentFabIsOpen = false;
     String prevArticle;
     post post;
+    RecyclerView RecComments;
+    ArrayList<CommentModel> Comments;
     Animation FabOpen, FabClose, FabClock, FabAntiClock;
+    RecAdapter recAdapter;
 
 
     @Override
@@ -51,9 +62,12 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
         editFab = findViewById(R.id.editfab);
         favFab = findViewById(R.id.favfab);
         deleteFab = findViewById(R.id.deletefab);
+        RecComments = findViewById(R.id.rec_Comment1);
         editFab.setVisibility(View.INVISIBLE);
         deleteFab.setVisibility(View.INVISIBLE);
         favFab.setVisibility(View.INVISIBLE);
+        Comments = new ArrayList<>();
+
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
@@ -67,13 +81,13 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
         FabClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
         FabClock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clock);
         FabAntiClock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anticlock);
+        RecComments.setLayoutManager(new LinearLayoutManager(this));
         database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 Author = String.valueOf(task.getResult().getValue());
             }
         });
-
         title.setText(Title);
         category.setText(Category);
         date.setText(Date);
@@ -185,6 +199,26 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
             }
         });
 
+        database.getReference("post").child(Title).child("comments").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    CommentModel commentModel = snapshot1.getValue(CommentModel.class);
+                    Comments.add(commentModel);
+
+                }
+                recAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        recAdapter = new RecAdapter(YourArticleDisplayActivity.this, Comments);
+        RecComments.setAdapter(recAdapter);
+
 
     }
 
@@ -193,4 +227,5 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
         finishAffinity();
 
     }
+
 }

@@ -2,6 +2,8 @@ package com.example.writeout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,17 +18,25 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ArticleDisplayActivity extends AppCompatActivity {
     TextView Title, Category, Date, Author;
     TextView Article;
-    ExtendedFloatingActionButton favFab;
+    ExtendedFloatingActionButton favFab,commentFab;
+    EditText Comment;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
     String stringTitle, stringArticle, stringCategory, stringAuthor, stringDate;
     post post;
+    RecyclerView recComments;
+    ArrayList<CommentModel> comments=new ArrayList<>();
+    RecAdapter recAdapter;
 
 
     @Override
@@ -43,12 +53,15 @@ public class ArticleDisplayActivity extends AppCompatActivity {
         Date = findViewById(R.id.tv_date2);
         Article = findViewById(R.id.etarticle2);
         favFab = findViewById(R.id.favfab2);
+        Comment=findViewById(R.id.et_comment);
+        commentFab=findViewById(R.id.fab_comment);
+        recComments=findViewById(R.id.rec_Comment2);
+        recComments.setLayoutManager(new LinearLayoutManager(this));
         stringTitle = intent1.getStringExtra("Title2");
         stringAuthor = intent2.getStringExtra("Author2");
         stringCategory = intent4.getStringExtra("Category2");
         stringDate = intent5.getStringExtra("Date2");
         Title.setText(stringTitle);
-
         Category.setText(stringCategory);
         Author.setText(stringAuthor);
         Date.setText(stringDate);
@@ -81,6 +94,52 @@ public class ArticleDisplayActivity extends AppCompatActivity {
 
             }
         });
+        commentFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Comment.getText().toString().isEmpty())
+                    Toast.makeText(ArticleDisplayActivity.this, "No Comment", Toast.LENGTH_SHORT).show();
+                else{
+                    database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if(task.isSuccessful()){
+                                CommentModel commentModel=new CommentModel(String.valueOf(task.getResult().getValue()),Comment.getText().toString());
+                                database.getReference("post").child(stringTitle).child("comments").child(Comment.getText().toString()).setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful())
+                                            Toast.makeText(ArticleDisplayActivity.this, "Comment posted", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                            
+                        }
+                    });
+
+
+                }
+            }
+        });
+        database.getReference("post").child(stringTitle).child("comments").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                comments.clear();
+                for(DataSnapshot snapshot1: snapshot.getChildren()){
+                    CommentModel commentModel=snapshot1.getValue(CommentModel.class);
+                    comments.add(commentModel);
+                }
+                recAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        recAdapter=new RecAdapter(this,comments);
+        recComments.setAdapter(recAdapter);
+
 
 
     }
