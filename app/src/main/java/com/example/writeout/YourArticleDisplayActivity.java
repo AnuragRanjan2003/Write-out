@@ -216,6 +216,7 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
 
             }
         });
+        RecComments.hasFixedSize();
         recAdapter = new RecAdapter(YourArticleDisplayActivity.this, Comments);
         RecComments.setAdapter(recAdapter);
 

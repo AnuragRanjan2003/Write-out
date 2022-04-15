@@ -7,6 +7,8 @@ import android.graphics.ColorSpace;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Switch;
@@ -35,6 +37,7 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
     Context context;
     ArrayList<model> list;
     ArrayList<model> completeList;
+    int lastPosition=-1;
 
     public MyAdapter2(Context context, ArrayList<model> list) {
         this.context = context;
@@ -86,8 +89,18 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> im
             holder.CardView.setCardBackgroundColor(Color.rgb(100, 163, 250));
         else
             holder.CardView.setCardBackgroundColor(Color.rgb(146, 214, 146));
+        setAnimation(holder.itemView,position);
 
 
+
+    }
+
+    private void setAnimation(View itemView, int position) {
+        if(position>lastPosition){
+        Animation animation= AnimationUtils.loadAnimation(context,R.anim.drop_down);
+        itemView.startAnimation(animation);
+        lastPosition=position;
+        }
 
     }
 

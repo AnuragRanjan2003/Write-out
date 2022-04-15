@@ -29,13 +29,13 @@ public class FavDisplayActivity extends AppCompatActivity {
     TextView title, category, date, author;
     TextView article;
     EditText etComment;
-    ExtendedFloatingActionButton unFav,fabComment;
+    ExtendedFloatingActionButton unFav, fabComment;
     String Title, Category, Author, Date;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
     RecyclerView recComments;
-    ArrayList<CommentModel> Comments=new ArrayList<>();
+    ArrayList<CommentModel> Comments = new ArrayList<>();
     RecAdapter recAdapter;
 
 
@@ -52,9 +52,9 @@ public class FavDisplayActivity extends AppCompatActivity {
         date = findViewById(R.id.tv_date3);
         article = findViewById(R.id.etarticle3);
         unFav = findViewById(R.id.unfavfab);
-        fabComment=findViewById(R.id.fab_comment3);
-        recComments=findViewById(R.id.rec_comments3);
-        etComment=findViewById(R.id.et_comment3);
+        fabComment = findViewById(R.id.fab_comment3);
+        recComments = findViewById(R.id.rec_comments3);
+        etComment = findViewById(R.id.et_comment3);
         Intent intent = getIntent();
         Title = intent.getStringExtra("Title3");
         title.setText(Title);
@@ -93,8 +93,8 @@ public class FavDisplayActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Comments.clear();
-                for (DataSnapshot snapshot1: snapshot.getChildren()){
-                    CommentModel commentModel= snapshot1.getValue(CommentModel.class);
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    CommentModel commentModel = snapshot1.getValue(CommentModel.class);
                     Comments.add(commentModel);
                 }
                 recAdapter.notifyDataSetChanged();
@@ -106,26 +106,27 @@ public class FavDisplayActivity extends AppCompatActivity {
             }
         });
         recComments.setLayoutManager(new LinearLayoutManager(this));
-        recAdapter=new RecAdapter(this,Comments);
+        recAdapter = new RecAdapter(this, Comments);
         recComments.setAdapter(recAdapter);
+        recComments.hasFixedSize();
         fabComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(etComment.getText().toString().isEmpty())
+                if (etComment.getText().toString().isEmpty())
                     Toast.makeText(FavDisplayActivity.this, "No Comment", Toast.LENGTH_SHORT).show();
-                else{
+                else {
                     database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if(task.isSuccessful()){
-                            CommentModel commentModel=new CommentModel(String.valueOf(task.getResult().getValue()),etComment.getText().toString());
-                            database.getReference("post").child(Title).child("comments").child(etComment.getText().toString()).setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful())
-                                        Toast.makeText(FavDisplayActivity.this, "Comment posted", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            if (task.isSuccessful()) {
+                                CommentModel commentModel = new CommentModel(String.valueOf(task.getResult().getValue()), etComment.getText().toString());
+                                database.getReference("post").child(Title).child("comments").child(etComment.getText().toString()).setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful())
+                                            Toast.makeText(FavDisplayActivity.this, "Comment posted", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         }
                     });
@@ -135,8 +136,9 @@ public class FavDisplayActivity extends AppCompatActivity {
 
 
     }
-    public void onBackPressed(){
-        startActivity(new Intent(FavDisplayActivity.this,MainActivity.class));
+
+    public void onBackPressed() {
+        startActivity(new Intent(FavDisplayActivity.this, MainActivity.class));
         finishAffinity();
     }
 }

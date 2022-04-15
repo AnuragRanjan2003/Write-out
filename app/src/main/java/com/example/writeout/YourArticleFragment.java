@@ -37,6 +37,7 @@ public class YourArticleFragment extends Fragment {
         database.getReference("users").child(firebaseUser.getUid()).child("posts").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                articleList.clear();
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     model Model = snapshot1.getValue(model.class);
                     articleList.add(Model);

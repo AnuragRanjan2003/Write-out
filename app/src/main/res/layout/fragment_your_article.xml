@@ -26,5 +26,5 @@
         android:id="@+id/rec_your_articles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="65dp" />
+        android:layout_marginTop="65dp"/>
 </FrameLayout>

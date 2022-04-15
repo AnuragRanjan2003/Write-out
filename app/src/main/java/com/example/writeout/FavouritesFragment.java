@@ -51,6 +51,7 @@ public class FavouritesFragment extends Fragment {
         database.getReference("users").child(firebaseUser.getUid()).child("fav").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayList.clear();
                 for (DataSnapshot snapshot1: snapshot.getChildren()){
                     model Model= snapshot1.getValue(model.class);
                     arrayList.add(Model);

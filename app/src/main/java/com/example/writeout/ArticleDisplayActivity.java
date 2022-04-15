@@ -105,7 +105,8 @@ public class ArticleDisplayActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             if (task.isSuccessful()) {
                                 CommentModel commentModel = new CommentModel(String.valueOf(task.getResult().getValue()), Comment.getText().toString());
-                                database.getReference("post").child(stringTitle).child("comments").child(Comment.getText().toString()).setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                database.getReference("post").child(stringTitle).child("comments").child(Comment.getText().toString()).setValue(commentModel)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful())
@@ -137,6 +138,7 @@ public class ArticleDisplayActivity extends AppCompatActivity {
 
             }
         });
+        recComments.hasFixedSize();
         recAdapter = new RecAdapter(this, comments);
         recComments.setAdapter(recAdapter);
 
