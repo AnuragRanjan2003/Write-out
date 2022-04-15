@@ -121,12 +121,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="Comments"
                 android:textStyle="bold|italic"
-                android:textSize="22sp"/>
+                android:textSize="22sp"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rec_Comment1"

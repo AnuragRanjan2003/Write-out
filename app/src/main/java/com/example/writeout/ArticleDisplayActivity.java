@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class ArticleDisplayActivity extends AppCompatActivity {
     TextView Title, Category, Date, Author;
     TextView Article;
-    ExtendedFloatingActionButton favFab,commentFab;
+    ExtendedFloatingActionButton favFab, commentFab;
     EditText Comment;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
@@ -35,7 +35,7 @@ public class ArticleDisplayActivity extends AppCompatActivity {
     String stringTitle, stringArticle, stringCategory, stringAuthor, stringDate;
     post post;
     RecyclerView recComments;
-    ArrayList<CommentModel> comments=new ArrayList<>();
+    ArrayList<CommentModel> comments = new ArrayList<>();
     RecAdapter recAdapter;
 
 
@@ -53,9 +53,9 @@ public class ArticleDisplayActivity extends AppCompatActivity {
         Date = findViewById(R.id.tv_date2);
         Article = findViewById(R.id.etarticle2);
         favFab = findViewById(R.id.favfab2);
-        Comment=findViewById(R.id.et_comment);
-        commentFab=findViewById(R.id.fab_comment);
-        recComments=findViewById(R.id.rec_Comment2);
+        Comment = findViewById(R.id.et_comment);
+        commentFab = findViewById(R.id.fab_comment);
+        recComments = findViewById(R.id.rec_Comment2);
         recComments.setLayoutManager(new LinearLayoutManager(this));
         stringTitle = intent1.getStringExtra("Title2");
         stringAuthor = intent2.getStringExtra("Author2");
@@ -97,23 +97,23 @@ public class ArticleDisplayActivity extends AppCompatActivity {
         commentFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Comment.getText().toString().isEmpty())
+                if (Comment.getText().toString().isEmpty())
                     Toast.makeText(ArticleDisplayActivity.this, "No Comment", Toast.LENGTH_SHORT).show();
-                else{
+                else {
                     database.getReference("users").child(firebaseUser.getUid()).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if(task.isSuccessful()){
-                                CommentModel commentModel=new CommentModel(String.valueOf(task.getResult().getValue()),Comment.getText().toString());
+                            if (task.isSuccessful()) {
+                                CommentModel commentModel = new CommentModel(String.valueOf(task.getResult().getValue()), Comment.getText().toString());
                                 database.getReference("post").child(stringTitle).child("comments").child(Comment.getText().toString()).setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful())
+                                        if (task.isSuccessful())
                                             Toast.makeText(ArticleDisplayActivity.this, "Comment posted", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
-                            
+
                         }
                     });
 
@@ -125,8 +125,8 @@ public class ArticleDisplayActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 comments.clear();
-                for(DataSnapshot snapshot1: snapshot.getChildren()){
-                    CommentModel commentModel=snapshot1.getValue(CommentModel.class);
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                    CommentModel commentModel = snapshot1.getValue(CommentModel.class);
                     comments.add(commentModel);
                 }
                 recAdapter.notifyDataSetChanged();
@@ -137,9 +137,8 @@ public class ArticleDisplayActivity extends AppCompatActivity {
 
             }
         });
-        recAdapter=new RecAdapter(this,comments);
+        recAdapter = new RecAdapter(this, comments);
         recComments.setAdapter(recAdapter);
-
 
 
     }
