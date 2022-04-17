@@ -6,6 +6,8 @@
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.238" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/drawable/button_str.xml" value="0.2265" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/drawable/buttonshape.xml" value="0.2745" />
+        <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/drawable/comment_bar.xml" value="0.1795" />
+        <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/drawable/comment_section.xml" value="0.1795" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/drawable/costom_indicator.xml" value="0.279" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/drawable/custom_fab.xml" value="0.279" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/drawable/custom_tablayout.xml" value="0.238" />
@@ -15,7 +17,7 @@
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/layout-v28/fragment_your_article.xml" value="0.25677083333333334" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/layout/Spinner_Array.xml" value="0.22530996152201796" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/layout/activity_article_display.xml" value="0.22530996152201796" />
-        <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/layout/activity_fav_display.xml" value="0.22530996152201796" />
+        <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/layout/activity_fav_display.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/layout/activity_forgot_password.xml" value="0.22530996152201796" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/layout/activity_main.xml" value="0.22530996152201796" />
         <entry key="..\:/AndroidProjects/WriteOut/app/src/main/res/layout/activity_profile.xml" value="0.22530996152201796" />

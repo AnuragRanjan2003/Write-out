@@ -42,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
     ArrayList<model> list;
     ArrayList<model> completeList;
     Animation animation;
-    int lastPosition=-1;
+    int lastPosition = -1;
 
     public MyAdapter(Context context, ArrayList<model> list) {
         this.context = context;
@@ -95,16 +95,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> impl
             holder.cardView.setCardBackgroundColor(Color.rgb(100, 163, 250));
         else
             holder.cardView.setCardBackgroundColor(Color.rgb(146, 214, 146));
-        setAnimation(holder.itemView,position);
+        setAnimation(holder.itemView, position);
 
 
     }
 
-    private void setAnimation(View itemView,int position) {
-        if(position>lastPosition)
-        animation=AnimationUtils.loadAnimation(context,R.anim.drop_down);
-        itemView.startAnimation(animation);
-        lastPosition=position;
+    private void setAnimation(View itemView, int position) {
+        if (position > lastPosition) {
+            animation = AnimationUtils.loadAnimation(context, R.anim.drop_down);
+            itemView.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     @Override

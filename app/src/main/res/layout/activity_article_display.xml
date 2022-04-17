@@ -10,6 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -147,52 +148,75 @@
                 android:textSize="18sp"
                 tools:ignore="Deprecated,TouchTargetSizeCheck" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/comments"
-                android:textSize="22sp"
-                android:textStyle="bold|italic" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rec_Comment2"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="5dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/comment_section"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp">
+                    android:layout_marginTop="10dp"
+                    android:text="@string/comments"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold|italic" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_comment"
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:hint="Write a comment"
-                        android:textAlignment="center" />
-                </com.google.android.material.textfield.TextInputLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rec_Comment2"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="5dp" />
 
-                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:id="@+id/fab_comment"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginLeft="10dp"
-                    android:backgroundTint="@color/fragmenttint"
-                    app:icon="@drawable/ic_baseline_comment_24"
-                    app:iconTint="@color/white"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/comment_bar"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp">
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/white">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:hint="Write a comment"
+                            android:maxWidth="220dp"
+                            android:minWidth="200dp"
+                            android:textAlignment="center" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                        android:id="@+id/fab_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center"
+                        android:layout_marginLeft="10dp"
+                        android:backgroundTint="@color/fragmenttint"
+                        app:icon="@drawable/ic_baseline_comment_24"
+                        app:iconTint="@color/white"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </LinearLayout>
             </LinearLayout>
 
 
@@ -207,7 +231,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="100dp"
         android:backgroundTint="#1E88E5"
         android:clickable="true"
         android:elevation="10dp"

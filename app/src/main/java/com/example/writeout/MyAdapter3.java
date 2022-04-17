@@ -33,18 +33,18 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> im
     Context context;
     ArrayList<model> list;
     ArrayList<model> completeList;
-    int lastPosition=-1;
+    int lastPosition = -1;
 
     public MyAdapter3(Context context, ArrayList<model> list) {
         this.context = context;
         this.list = list;
-        completeList=new ArrayList<>();
+        completeList = new ArrayList<>();
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.rowdesign,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.rowdesign, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -58,8 +58,10 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> im
         FirebaseDatabase.getInstance().getReference("post").child(model.getTitle()).child("article").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(String.valueOf(task.getResult().getValue()).length()>=100)
-                    holder.subArticle.setText(String.valueOf(task.getResult().getValue()).substring(0,100));
+                if (String.valueOf(task.getResult().getValue()).length() >= 100)
+                    holder.subArticle.setText(String.valueOf(task.getResult().getValue()).substring(0, 100));
+                else if(String.valueOf(task.getResult().getValue()).equals("null"))
+                    holder.subArticle.setText("Article was removed");
                 else
                     holder.subArticle.setText(String.valueOf(task.getResult().getValue()));
             }
@@ -77,22 +79,22 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> im
 
             }
         });
-        if(position%3==0)
+        if (position % 3 == 0)
             holder.CardView.setCardBackgroundColor(Color.rgb(247, 101, 89));
-        else if(position%3==1)
+        else if (position % 3 == 1)
             holder.CardView.setCardBackgroundColor(Color.rgb(100, 163, 250));
         else
             holder.CardView.setCardBackgroundColor(Color.rgb(146, 214, 146));
-        setAnimation(holder.itemView,position);
+        setAnimation(holder.itemView, position);
 
 
     }
 
     private void setAnimation(View itemView, int position) {
-        if(position>lastPosition){
-            Animation animation=AnimationUtils.loadAnimation(context,R.anim.drop_down);
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.drop_down);
             itemView.startAnimation(animation);
-            lastPosition=position;
+            lastPosition = position;
         }
     }
 
@@ -106,20 +108,22 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> im
     public Filter getFilter() {
         return filter;
     }
-    Filter filter =new Filter() {
+
+    Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            ArrayList<model> filteredList=new ArrayList<>();
-            String inputString=charSequence.toString().toLowerCase().trim();
-            if(!inputString.isEmpty()) {
-                for(model Model: completeList){
-                    if(Model.getCategory().toLowerCase().trim().contains(inputString)){
-                        filteredList.add(Model); }
+            ArrayList<model> filteredList = new ArrayList<>();
+            String inputString = charSequence.toString().toLowerCase().trim();
+            if (!inputString.isEmpty()) {
+                for (model Model : completeList) {
+                    if (Model.getCategory().toLowerCase().trim().contains(inputString)) {
+                        filteredList.add(Model);
+                    }
                 }
 
-                if(filteredList.isEmpty())
-                    Toast.makeText(context, "No Results found", Toast.LENGTH_SHORT).show();}
-            else if (inputString.isEmpty())
+                if (filteredList.isEmpty())
+                    Toast.makeText(context, "No Results found", Toast.LENGTH_SHORT).show();
+            } else if (inputString.isEmpty())
                 filteredList.addAll(completeList);
 
             FilterResults filterResults = new FilterResults();
@@ -137,16 +141,17 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.MyViewHolder> im
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView Title,Category,Date,Author,subArticle;
+        TextView Title, Category, Date, Author, subArticle;
         CardView CardView;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            Title=itemView.findViewById(R.id.display_title2);
-            Category=itemView.findViewById(R.id.display_category2);
-            Date=itemView.findViewById(R.id.display_date2);
-            Author=itemView.findViewById(R.id.display_author2);
-            CardView=itemView.findViewById(R.id.cardview2);
-            subArticle=itemView.findViewById(R.id.sub_article);
+            Title = itemView.findViewById(R.id.display_title2);
+            Category = itemView.findViewById(R.id.display_category2);
+            Date = itemView.findViewById(R.id.display_date2);
+            Author = itemView.findViewById(R.id.display_author2);
+            CardView = itemView.findViewById(R.id.cardview2);
+            subArticle = itemView.findViewById(R.id.sub_article);
         }
     }
 }

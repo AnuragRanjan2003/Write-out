@@ -2,7 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    app:cardCornerRadius="8dp"
+    android:background="@color/white"
+    android:layout_marginBottom="2dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,13 +14,17 @@
         android:layout_marginLeft="15dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp">
+
     <TextView
         android:id="@+id/tv_sender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sender"
+        android:textColor="@color/black"
+        android:layout_marginBottom="2dp"
         android:textStyle="bold"
         android:textSize="18sp"/>
+
 
     <TextView
         android:id="@+id/tv_comment"

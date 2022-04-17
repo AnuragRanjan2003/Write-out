@@ -120,7 +120,8 @@ public class FavDisplayActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             if (task.isSuccessful()) {
                                 CommentModel commentModel = new CommentModel(String.valueOf(task.getResult().getValue()), etComment.getText().toString());
-                                database.getReference("post").child(Title).child("comments").child(etComment.getText().toString()).setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                database.getReference("post").child(Title).child("comments").child(etComment.getText().toString()).setValue(commentModel)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful())

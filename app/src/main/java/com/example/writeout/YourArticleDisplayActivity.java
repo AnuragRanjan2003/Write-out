@@ -202,6 +202,7 @@ public class YourArticleDisplayActivity extends AppCompatActivity {
         database.getReference("post").child(Title).child("comments").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Comments.clear();
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                     CommentModel commentModel = snapshot1.getValue(CommentModel.class);
                     Comments.add(commentModel);
