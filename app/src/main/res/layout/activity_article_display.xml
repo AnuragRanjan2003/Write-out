@@ -200,7 +200,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:hint="Write a comment"
-                            android:maxWidth="220dp"
                             android:minWidth="200dp"
                             android:textAlignment="center" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -210,7 +209,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="20dp"
                         android:backgroundTint="@color/fragmenttint"
                         app:icon="@drawable/ic_baseline_comment_24"
                         app:iconTint="@color/white"

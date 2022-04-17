@@ -21,7 +21,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="300dp"
+                android:layout_width="305dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="0dp"
@@ -60,7 +60,7 @@
                     android:layout_marginTop="30dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSignInEmail"
-                        android:layout_width="300dp"
+                        android:layout_width="305dp"
                         android:layout_height="52dp"
                         android:layout_gravity="center"
                         android:drawablePadding="5dp"
@@ -83,7 +83,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSignInPassword"
-                        android:layout_width="300dp"
+                        android:layout_width="305dp"
                         android:layout_height="52dp"
                         android:layout_gravity="center"
                         android:drawableTint="@color/baseOrange"

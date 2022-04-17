@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
 public class YourArticleFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
@@ -45,6 +46,7 @@ public class YourArticleFragment extends Fragment {
                 }
                 myAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -109,9 +111,9 @@ public class YourArticleFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (!newText.isEmpty()){
-                    myAdapter.getFilter().filter(newText);}
-                else {
+                if (!newText.isEmpty()) {
+                    myAdapter.getFilter().filter(newText);
+                } else {
                     //reload all the articles
                     LoadArticles();
                 }
